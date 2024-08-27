@@ -1,13 +1,16 @@
-import { Route, Router, Routes } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
+
+import Login from "./pages/Login";
+
 import "../styles/main.scss";
 
 const App = () => {
   return (
-    <Router>
-      <div className="app-container">
-        <Routes></Routes>
-      </div>
-    </Router>
+    <div className="app-container">
+      <Routes>
+        <Route path="/login" element={<Login />} />
+      </Routes>
+    </div>
   );
 };
 
