@@ -29,6 +29,8 @@ export const AuthProvider = ({ children }) => {
     return unsubscribe;
   }, []);
 
+  console.log("currentUser", currentUser);
+
   const values = {
     currentUser,
     signIn,
