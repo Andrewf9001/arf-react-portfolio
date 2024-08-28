@@ -1,12 +1,14 @@
 import { BrowserRouter, Routes, Route, NavLink } from "react-router-dom";
 
 import Login from "./pages/Login";
+import Home from "./pages/Home";
 
-import "../styles/main.scss";
 import { useAuth } from "../context/AuthContext";
 
+import "../styles/main.scss";
+
 const App = () => {
-  const { logout } = useAuth();
+  const { currentUser, logout } = useAuth();
 
   return (
     <div className="app-container">
@@ -17,6 +19,8 @@ const App = () => {
 
         <Routes>
           <Route path="/login" element={<Login />} />
+
+          {currentUser && <Route exact path="/" element={<Home />} />}
         </Routes>
       </BrowserRouter>
     </div>
