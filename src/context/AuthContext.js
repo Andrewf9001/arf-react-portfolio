@@ -5,12 +5,15 @@ import {
   signOut,
   onAuthStateChanged,
 } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+
+  const navigate = useNavigate();
 
   const signIn = (email, password) => {
     return signInWithEmailAndPassword(auth, email, password);
@@ -30,6 +33,12 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   console.log("currentUser", currentUser);
+
+  useEffect(() => {
+    if (currentUser) {
+      navigate("/");
+    }
+  }, []);
 
   const values = {
     currentUser,
