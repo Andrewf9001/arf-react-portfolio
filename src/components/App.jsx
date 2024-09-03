@@ -8,8 +8,16 @@ import { useAuth } from "../context/AuthContext";
 import "../styles/main.scss";
 import Navbar from "./navigation/Navbar";
 
+/* 
+  TODO: 
+    - Extract logged in features
+      - Dashboard
+      - Form elements
+    - Viewers should be able to view portfolio without logging in
+*/
+
 const App = () => {
-  const { currentUser, logout } = useAuth();
+  const { currentUser } = useAuth();
 
   return (
     <div className="app-container">
