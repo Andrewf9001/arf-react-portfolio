@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route, NavLink } from "react-router-dom";
 
 import Login from "./pages/Login";
-import Home from "./pages/Home";
+import Dashboard from "./pages/Dashboard";
 
 import { useAuth } from "../context/AuthContext";
 
@@ -20,7 +20,7 @@ const App = () => {
 
         {currentUser && (
           <>
-            <Route exact path="/dashboard" element={<Home />} />
+            <Route exact path="/dashboard" element={<Dashboard />} />
             <Route path="/test" element={<Test />} />
           </>
         )}
