@@ -6,15 +6,14 @@ import Dashboard from "./pages/Dashboard";
 import { useAuth } from "../context/AuthContext";
 
 import "../styles/main.scss";
-import Test from "./pages/Test";
+import Navbar from "./navigation/Navbar";
 
 const App = () => {
   const { currentUser, logout } = useAuth();
 
   return (
     <div className="app-container">
-      <button onClick={logout}>Logout</button>
-      <NavLink to="/dashboard">Dashboard</NavLink>
+      <Route element={<Navbar />} />
 
       <Routes>
         <Route path="/owner/auth" element={<Login />} />
