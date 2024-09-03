@@ -6,6 +6,7 @@ import Home from "./pages/Home";
 import { useAuth } from "../context/AuthContext";
 
 import "../styles/main.scss";
+import Test from "./pages/Test";
 
 const App = () => {
   const { currentUser, logout } = useAuth();
@@ -17,7 +18,12 @@ const App = () => {
       <Routes>
         <Route path="/owner/auth" element={<Login />} />
 
-        {currentUser && <Route exact path="/" element={<Home />} />}
+        {currentUser && (
+          <>
+            <Route exact path="/dashboard" element={<Home />} />
+            <Route path="/test" element={<Test />} />
+          </>
+        )}
       </Routes>
     </div>
   );

@@ -34,11 +34,11 @@ export const AuthProvider = ({ children }) => {
     return unsubscribe;
   }, []);
 
-  useEffect(() => {
-    if (currentUser) {
-      navigate("/");
-    }
-  }, [currentUser, navigate]);
+  // useEffect(() => {
+  //   if (currentUser) {
+  //     navigate("/");
+  //   }
+  // }, [currentUser, navigate]);
 
   const values = {
     currentUser,
