@@ -12,17 +12,13 @@ const App = () => {
 
   return (
     <div className="app-container">
-      <BrowserRouter>
-        <NavLink to="/login">Login</NavLink>
+      <button onClick={logout}>Logout</button>
 
-        <button onClick={logout}>Logout</button>
+      <Routes>
+        <Route path="/owner/auth" element={<Login />} />
 
-        <Routes>
-          <Route path="/login" element={<Login />} />
-
-          {currentUser && <Route exact path="/" element={<Home />} />}
-        </Routes>
-      </BrowserRouter>
+        {currentUser && <Route exact path="/" element={<Home />} />}
+      </Routes>
     </div>
   );
 };

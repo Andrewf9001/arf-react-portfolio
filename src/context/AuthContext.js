@@ -16,7 +16,9 @@ export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
 
   const signIn = (email, password) => {
-    return signInWithEmailAndPassword(auth, email, password);
+    return signInWithEmailAndPassword(auth, email, password).then(
+      () => auth && navigate("/")
+    );
   };
 
   const logout = () => {
@@ -32,13 +34,11 @@ export const AuthProvider = ({ children }) => {
     return unsubscribe;
   }, []);
 
-  console.log("currentUser", currentUser);
-
   useEffect(() => {
     if (currentUser) {
       navigate("/");
     }
-  }, []);
+  }, [currentUser, navigate]);
 
   const values = {
     currentUser,
