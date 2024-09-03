@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, NavLink } from "react-router-dom";
+import { Routes, Route, NavLink } from "react-router-dom";
 
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
@@ -14,6 +14,7 @@ const App = () => {
   return (
     <div className="app-container">
       <button onClick={logout}>Logout</button>
+      <NavLink to="/dashboard">Dashboard</NavLink>
 
       <Routes>
         <Route path="/owner/auth" element={<Login />} />
@@ -21,7 +22,6 @@ const App = () => {
         {currentUser && (
           <>
             <Route exact path="/dashboard" element={<Dashboard />} />
-            <Route path="/test" element={<Test />} />
           </>
         )}
       </Routes>

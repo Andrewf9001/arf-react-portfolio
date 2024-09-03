@@ -15,14 +15,14 @@ export const AuthProvider = ({ children }) => {
 
   const navigate = useNavigate();
 
-  const signIn = (email, password) => {
+  const signIn = async (email, password) => {
     return signInWithEmailAndPassword(auth, email, password).then(
-      () => auth && navigate("/")
+      () => auth && navigate("/dashboard")
     );
   };
 
-  const logout = () => {
-    return signOut(auth);
+  const logout = async () => {
+    return signOut(auth).finally(() => navigate("/owner/auth"));
   };
 
   useEffect(() => {
@@ -33,12 +33,6 @@ export const AuthProvider = ({ children }) => {
 
     return unsubscribe;
   }, []);
-
-  // useEffect(() => {
-  //   if (currentUser) {
-  //     navigate("/");
-  //   }
-  // }, [currentUser, navigate]);
 
   const values = {
     currentUser,
