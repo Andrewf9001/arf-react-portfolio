@@ -22,7 +22,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logout = async () => {
-    return signOut(auth).finally(() => navigate("/owner/auth"));
+    return signOut(auth).finally(() => navigate("/"));
   };
 
   useEffect(() => {

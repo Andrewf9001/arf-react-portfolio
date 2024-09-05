@@ -26,7 +26,7 @@ const App = () => {
 
       <Routes>
         <Route path="/owner/auth" element={<Login />} />
-        <Route path="/" element={<Homepage />} />
+        <Route exact path="/" element={<Homepage />} />
 
         {currentUser && (
           <>
