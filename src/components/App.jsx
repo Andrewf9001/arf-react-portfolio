@@ -1,21 +1,14 @@
-import { Routes, Route, NavLink } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
-import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
+import Navbar from "./navigation/Navbar";
+import Homepage from "./pages/Homepage";
+import About from "./pages/About";
+import Login from "./pages/Login";
 
 import { useAuth } from "../context/AuthContext";
 
 import "../styles/main.scss";
-import Navbar from "./navigation/Navbar";
-import Homepage from "./pages/Homepage";
-
-/* 
-  TODO: 
-    - Extract logged in features
-      - Dashboard
-      - Form elements
-    - Viewers should be able to view portfolio without logging in
-*/
 
 const App = () => {
   const { currentUser } = useAuth();
@@ -25,8 +18,10 @@ const App = () => {
       <Navbar />
 
       <Routes>
-        <Route path="/owner/auth" element={<Login />} />
         <Route exact path="/" element={<Homepage />} />
+        <Route path="/about" element={<About />} />
+
+        <Route path="/owner/auth" element={<Login />} />
 
         {currentUser && (
           <>
