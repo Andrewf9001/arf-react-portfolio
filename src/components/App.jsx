@@ -7,6 +7,7 @@ import { useAuth } from "../context/AuthContext";
 
 import "../styles/main.scss";
 import Navbar from "./navigation/Navbar";
+import Homepage from "./pages/Homepage";
 
 /* 
   TODO: 
@@ -21,10 +22,11 @@ const App = () => {
 
   return (
     <div className="app-container">
-      <Route element={<Navbar />} />
+      <Navbar />
 
       <Routes>
         <Route path="/owner/auth" element={<Login />} />
+        <Route path="/" element={<Homepage />} />
 
         {currentUser && (
           <>
