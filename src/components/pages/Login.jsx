@@ -15,20 +15,28 @@ const Login = () => {
 
   return (
     <div className="login-container">
+      <h1>Login</h1>
+
       <form onSubmit={handleSubmit}>
-        <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
+        <div className="input-wrapper">
+          <label>Email: </label>
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </div>
 
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
+        <div className="input-wrapper">
+          <label>Password: </label>
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
 
-        <button>Submit</button>
+        <button>Login</button>
       </form>
     </div>
   );
