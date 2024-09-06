@@ -19,7 +19,7 @@ const Login = () => {
 
       <form onSubmit={handleSubmit}>
         <div className="input-wrapper">
-          <label>Email: </label>
+          <label>Email</label>
           <input
             type="email"
             value={email}
@@ -28,7 +28,7 @@ const Login = () => {
         </div>
 
         <div className="input-wrapper">
-          <label>Password: </label>
+          <label>Password</label>
           <input
             type="password"
             value={password}
