@@ -1,0 +1,23 @@
+.about-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  margin-top: 2%;
+
+  .content-wrapper {
+    width: 70%;
+
+    img {
+      float: left;
+      width: 18%;
+      margin-top: 0.5%;
+      margin-right: 2%;
+    }
+
+    p {
+      font-size: 18px;
+      line-height: 1.6;
+      margin: 0;
+    }
+  }
+}
