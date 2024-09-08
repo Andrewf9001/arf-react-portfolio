@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { projects } from "../../assets/mockData/mockProjects";
 
 const Homepage = () => {
@@ -6,9 +7,14 @@ const Homepage = () => {
       {projects.map((project) => {
         return (
           <div className="projects-wrapper" key={project.id}>
-            <h3>{project.name}</h3>
+            <div className="name-image-wrapper">
+              <img height="60px" src={project.image} alt="Project Icon" />
 
-            <img height="60px" src={project.image} alt="Project Icon" />
+              <Link to="/">
+                <h3>{project.name}</h3>
+              </Link>
+            </div>
+
             <p>{project.description}</p>
           </div>
         );
