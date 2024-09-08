@@ -9,6 +9,7 @@ import Login from "./pages/Login";
 import { useAuth } from "../context/AuthContext";
 
 import "../styles/main.scss";
+import Project from "./pages/Project";
 
 const App = () => {
   const { currentUser } = useAuth();
@@ -20,6 +21,8 @@ const App = () => {
       <Routes>
         <Route exact path="/" element={<Homepage />} />
         <Route path="/about" element={<About />} />
+
+        <Route path="/project/:projectId" element={<Project />} />
 
         <Route path="/owner/auth" element={<Login />} />
 

@@ -10,7 +10,7 @@ const Homepage = () => {
             <div className="name-image-wrapper">
               <img height="60px" src={project.image} alt="Project Icon" />
 
-              <Link to="/">
+              <Link to={`/project/${project.id}`}>
                 <h3>{project.name}</h3>
               </Link>
             </div>
