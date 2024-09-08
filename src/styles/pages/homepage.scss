@@ -1,0 +1,11 @@
+.homepage-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin: 2%;
+
+  .projects-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
