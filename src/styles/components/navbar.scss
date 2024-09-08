@@ -14,10 +14,17 @@
     a {
       text-decoration: none;
       color: black;
+      border-bottom: 1px solid transparent;
+      transition: 0.3s ease-in-out;
+
+      &:hover {
+        color: #282828d4;
+        border-color: #282828d4;
+      }
     }
 
     .active {
-      color: #66ff66;
+      border-color: black;
     }
   }
 
@@ -26,7 +33,12 @@
       font-size: 18px;
       background-color: transparent;
       border: none;
+      transition: 0.3s ease-in-out;
       cursor: pointer;
+
+      &:hover {
+        color: #282828d4;
+      }
     }
   }
 }
