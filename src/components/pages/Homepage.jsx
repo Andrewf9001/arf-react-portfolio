@@ -1,7 +1,18 @@
+import { projects } from "../../assets/mockData/mockProjects";
+
 const Homepage = () => {
   return (
     <div className="homepage-container">
-      <h1>Homepage</h1>
+      {projects.map((project) => {
+        return (
+          <div className="projects-wrapper" key={project.id}>
+            <h3>{project.name}</h3>
+
+            <img height="60px" src={project.image} alt="Project Icon" />
+            <p>{project.description}</p>
+          </div>
+        );
+      })}
     </div>
   );
 };
