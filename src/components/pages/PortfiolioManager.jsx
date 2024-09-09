@@ -1,4 +1,4 @@
-import PortfolioSidebar from "../features/PortfolioSidebar";
+// import PortfolioSidebar from "../features/PortfolioSidebar";
 // import PortfolioForm from "../forms/PortfolioForm";
 
 const PortfolioManager = () => {
@@ -6,9 +6,7 @@ const PortfolioManager = () => {
     <div className="portfolio-manager-container">
       <div className="left-column">{/* <PortfolioForm /> */}</div>
 
-      <div className="right-column">
-        <PortfolioSidebar />
-      </div>
+      <div className="right-column">{/* <PortfolioSidebar /> */}</div>
     </div>
   );
 };
