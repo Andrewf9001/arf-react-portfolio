@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 
-import Dashboard from "./pages/Dashboard";
+import PortfolioManager from "./pages/PortfiolioManager";
 import Navbar from "./navigation/Navbar";
 import Homepage from "./pages/Homepage";
 import About from "./pages/About";
@@ -28,7 +28,7 @@ const App = () => {
 
         {currentUser && (
           <>
-            <Route exact path="/dashboard" element={<Dashboard />} />
+            <Route path="/portfolio-manager" element={<PortfolioManager />} />
           </>
         )}
       </Routes>

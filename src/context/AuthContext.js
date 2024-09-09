@@ -17,7 +17,7 @@ export const AuthProvider = ({ children }) => {
 
   const signIn = async (email, password) => {
     return signInWithEmailAndPassword(auth, email, password).then(
-      () => auth && navigate("/dashboard")
+      () => auth && navigate("/")
     );
   };
 
