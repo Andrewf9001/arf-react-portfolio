@@ -9,7 +9,10 @@ const Navbar = () => {
       <div className="left-column">
         <NavLink to="/">Home</NavLink>
         <NavLink to="/about">About</NavLink>
-        {currentUser && <NavLink to="/dashboard">Dashboard</NavLink>}
+
+        {currentUser && (
+          <NavLink to="/portfolio-manager">Portfolio Manager</NavLink>
+        )}
       </div>
 
       {currentUser && (
