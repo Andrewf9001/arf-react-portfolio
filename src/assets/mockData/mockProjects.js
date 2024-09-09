@@ -31,4 +31,20 @@ export const projects = [
     video: "N/A",
     description: "Air BnB for sport centers",
   },
+  {
+    id: 4,
+    name: "Famlinc",
+    image: noSquare,
+    video: "N/A",
+    description:
+      "Discover the best way to connect with family and relatives all in one place. You can create family lists, send group email to notify of events, or connect with long lost relatives. FamLinc is A great place to reach out to those you love.",
+  },
+  {
+    id: 5,
+    name: "Pantry Partner",
+    image: noSquare,
+    video: "N/A",
+    description:
+      "Online recipe and shopping manager, to help with building shopping lists and documenting and sharing your favorite recipes",
+  },
 ];
