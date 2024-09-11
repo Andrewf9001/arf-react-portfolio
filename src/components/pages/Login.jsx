@@ -5,7 +5,7 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const { signIn } = useAuth();
+  const { signIn, error, handleErrorMsg } = useAuth();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -18,12 +18,17 @@ const Login = () => {
       <h1>Login</h1>
 
       <form onSubmit={handleSubmit}>
+        <div className="error">{error}</div>
+
         <div className="input-wrapper">
           <label>Email</label>
           <input
             type="email"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => {
+              setEmail(e.target.value);
+              handleErrorMsg(null);
+            }}
           />
         </div>
 
@@ -32,7 +37,10 @@ const Login = () => {
           <input
             type="password"
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(e) => {
+              setPassword(e.target.value);
+              handleErrorMsg(null);
+            }}
           />
         </div>
 
