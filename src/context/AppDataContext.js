@@ -9,9 +9,6 @@ export const AppDataProvider = ({ children }) => {
   const [hobbies, setHobbies] = useState(null);
   const [projects, setProjects] = useState(null);
 
-  console.log("hobbies", hobbies);
-  console.log("projects", projects);
-
   useEffect(() => {
     const unsubscribeHobbies = onSnapshot(
       collection(db, "Hobbies"),
