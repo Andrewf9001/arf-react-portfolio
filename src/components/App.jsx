@@ -10,28 +10,31 @@ import Login from "./pages/Login";
 import { useAuth } from "../context/AuthContext";
 
 import "../styles/main.scss";
+import { AppDataProvider } from "../context/AppDataContext";
 
 const App = () => {
   const { currentUser } = useAuth();
 
   return (
     <div className="app-container">
-      <Navbar />
+      <AppDataProvider>
+        <Navbar />
 
-      <Routes>
-        <Route exact path="/" element={<Homepage />} />
-        <Route path="/about" element={<About />} />
+        <Routes>
+          <Route exact path="/" element={<Homepage />} />
+          <Route path="/about" element={<About />} />
 
-        <Route path="/project/:projectId" element={<Project />} />
+          <Route path="/project/:projectId" element={<Project />} />
 
-        <Route path="/owner/auth" element={<Login />} />
+          <Route path="/owner/auth" element={<Login />} />
 
-        {currentUser && (
-          <>
-            <Route path="/portfolio-manager" element={<PortfolioManager />} />
-          </>
-        )}
-      </Routes>
+          {currentUser && (
+            <>
+              <Route path="/portfolio-manager" element={<PortfolioManager />} />
+            </>
+          )}
+        </Routes>
+      </AppDataProvider>
     </div>
   );
 };
