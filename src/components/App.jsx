@@ -3,13 +3,13 @@ import { Routes, Route } from "react-router-dom";
 import PortfolioManager from "./pages/PortfiolioManager";
 import Navbar from "./navigation/Navbar";
 import Homepage from "./pages/Homepage";
+import Project from "./pages/Project";
 import About from "./pages/About";
 import Login from "./pages/Login";
 
 import { useAuth } from "../context/AuthContext";
 
 import "../styles/main.scss";
-import Project from "./pages/Project";
 
 const App = () => {
   const { currentUser } = useAuth();
