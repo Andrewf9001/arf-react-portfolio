@@ -123,7 +123,6 @@ const PortfolioForm = () => {
           <input
             type="file"
             accept="image/*"
-            value={thumbImage}
             onChange={(e) => setThumbImage(e.target.files[0])}
           />
         </div>
@@ -132,7 +131,6 @@ const PortfolioForm = () => {
           <input
             type="file"
             accept="image/*"
-            value={bannerImage}
             onChange={(e) => setBannerImage(e.target.files[0])}
           />
         </div>
@@ -141,7 +139,6 @@ const PortfolioForm = () => {
           <input
             type="file"
             accept="image/*"
-            value={logoImage}
             onChange={(e) => setLogoImage(e.target.files[0])}
           />
         </div>
@@ -150,7 +147,6 @@ const PortfolioForm = () => {
           <input
             type="file"
             accept="video/*"
-            value={video}
             onChange={(e) => setVideo(e.target.files[0])}
           />
         </div>
