@@ -53,6 +53,7 @@ const PortfolioForm = () => {
         videoUrl,
       });
 
+      setIsLoading(false);
       alert("Upload Successful");
     } catch (e) {
       console.error("Form Submission: ", e);
