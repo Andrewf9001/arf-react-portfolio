@@ -7,7 +7,7 @@ const Homepage = () => {
   const { hobbies, projects } = useAppData();
 
   const renderData = (data) => {
-    return data.map((item) => {
+    return data?.map((item) => {
       return (
         <Link className="item-wrapper" to={`/project/${item.id}`}>
           <div

@@ -96,7 +96,7 @@ const PortfolioForm = () => {
       </div>
 
       <div className="one-column">
-        <input
+        <textarea
           type="text"
           name="description"
           placeholder="Description..."

@@ -1,0 +1,10 @@
+.one-column {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.two-column {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: 30px;
+}

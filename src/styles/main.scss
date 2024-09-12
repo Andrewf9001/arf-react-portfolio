@@ -1,8 +1,10 @@
 @import "./base/common.scss";
 
+@import "./layout/navbar.scss";
+@import "./layout/forms.scss";
+@import "./layout/grid.scss";
+
 @import "./pages/portfolio-manager.scss";
 @import "./pages/homepage.scss";
 @import "./pages/about.scss";
 @import "./pages/login.scss";
-
-@import "./components/navbar.scss";
