@@ -1,4 +1,22 @@
 .portfolio-form-container {
   display: grid;
   gap: 21px;
+  margin: 4%;
+
+  input[type="text"],
+  textarea,
+  select {
+    border: 2px solid #249999;
+    border-radius: 10px;
+    background-color: transparent !important;
+    font-size: 1rem;
+    outline: none;
+    padding: 10px;
+  }
+
+  textarea {
+    height: 100px;
+    font-family: inherit;
+    resize: none;
+  }
 }
