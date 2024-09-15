@@ -1,36 +1,38 @@
-import { useRef, useState } from "react";
+import { forwardRef, useRef, useState } from "react";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { addDoc, collection } from "firebase/firestore";
 
 import { db, storage } from "../../services/firebase";
 
-const PortfolioForm = () => {
+const PortfolioForm = forwardRef(({ data, handleChange }, refs) => {
+  const { thumbRef, bannerRef, logoRef, videoRef } = refs;
+
   const [isLoading, setIsLoading] = useState(false);
-  const [description, setDescription] = useState("");
-  const [category, setCategory] = useState("");
-  const [urlText, setUrlText] = useState("");
-  const [name, setName] = useState("");
-  const [url, setUrl] = useState("");
+  // const [description, setDescription] = useState("");
+  // const [category, setCategory] = useState("");
+  // const [urlText, setUrlText] = useState("");
+  // const [name, setName] = useState("");
+  // const [url, setUrl] = useState("");
 
-  const thumbRef = useRef();
-  const bannerRef = useRef();
-  const logoRef = useRef();
-  const videoRef = useRef();
+  // const thumbRef = useRef();
+  // const bannerRef = useRef();
+  // const logoRef = useRef();
+  // const videoRef = useRef();
 
-  const clearForm = () => {
-    setDescription("");
-    setCategory("");
-    setUrlText("");
-    setName("");
-    setUrl("");
+  // const clearForm = () => {
+  //   setDescription("");
+  //   setCategory("");
+  //   setUrlText("");
+  //   setName("");
+  //   setUrl("");
 
-    thumbRef.current.value = "";
-    bannerRef.current.value = "";
-    logoRef.current.value = "";
-    videoRef.current.value = "";
+  //   thumbRef.current.value = "";
+  //   bannerRef.current.value = "";
+  //   logoRef.current.value = "";
+  //   videoRef.current.value = "";
 
-    setIsLoading(false);
-  };
+  //   setIsLoading(false);
+  // };
 
   const uploadToStorage = async (file, path) => {
     const storageRef = ref(storage, `${path}/${file.name}`);
@@ -46,7 +48,7 @@ const PortfolioForm = () => {
     e.preventDefault();
     setIsLoading(true);
 
-    if (!category) return;
+    if (!data.category) return;
 
     try {
       const thumbUrl = await handleFile(
@@ -58,11 +60,11 @@ const PortfolioForm = () => {
       const logoUrl = await handleFile(logoRef.current.files[0], "logos");
       const videoUrl = await handleFile(videoRef.current.files[0], "videos");
 
-      await addDoc(collection(db, category), {
-        name,
-        url,
-        urlText,
-        description,
+      await addDoc(collection(db, data.category), {
+        name: data.name,
+        url: data.url,
+        urlText: data.urlText,
+        description: data.description,
         thumbUrl,
         bannerUrl,
         logoUrl,
@@ -82,11 +84,14 @@ const PortfolioForm = () => {
           type="text"
           name="name"
           placeholder="Portfolio Item Name"
-          value={name}
+          value={data.name}
           onChange={(e) => setName(e.target.value)}
         />
 
-        <select value={category} onChange={(e) => setCategory(e.target.value)}>
+        <select
+          value={data.category}
+          onChange={(e) => setCategory(e.target.value)}
+        >
           <option value="">Category</option>
           <option value="Hobbies">Hobbies</option>
           <option value="Projects">Web Development</option>
@@ -98,7 +103,7 @@ const PortfolioForm = () => {
           type="text"
           name="url"
           placeholder="URL"
-          value={url}
+          value={data.url}
           onChange={(e) => setUrl(e.target.value)}
         />
 
@@ -106,7 +111,7 @@ const PortfolioForm = () => {
           type="text"
           name="url-text"
           placeholder="URL Link Text"
-          value={urlText}
+          value={data.urlText}
           onChange={(e) => setUrlText(e.target.value)}
         />
       </div>
@@ -116,7 +121,7 @@ const PortfolioForm = () => {
           type="text"
           name="description"
           placeholder="Description..."
-          value={description}
+          value={data.description}
           onChange={(e) => setDescription(e.target.value)}
         />
       </div>
@@ -142,6 +147,6 @@ const PortfolioForm = () => {
       <button>{isLoading ? "Uploading..." : "Save"}</button>
     </form>
   );
-};
+});
 
 export default PortfolioForm;

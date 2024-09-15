@@ -1,11 +1,48 @@
+import { useRef, useState } from "react";
+
 import PortfolioSidebar from "../features/PortfolioSidebar";
-import PortfolioForm from "../forms/PortfolioForm";
+import PortfolioForm from "../features/PortfolioForm";
+
+const INITIAL_FORM_STATE = {
+  name: "",
+  description: "",
+  category: "",
+  urlText: "",
+  url: "",
+};
 
 const PortfolioManager = () => {
+  // const [isLoading, setIsLoading] = useState();
+  const [formData, setFormData] = useState(INITIAL_FORM_STATE);
+
+  const thumbRef = useRef();
+  const bannerRef = useRef();
+  const logoRef = useRef();
+  const videoRef = useRef();
+
+  const handleFormField = (name, value) => {
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const clearForm = () => {
+    setFormData(INITIAL_FORM_STATE);
+
+    thumbRef.current.value = "";
+    bannerRef.current.value = "";
+    logoRef.current.value = "";
+    videoRef.current.value = "";
+
+    // setIsLoading(false);
+  };
+
   return (
     <div className="portfolio-manager-container">
       <div className="left-column">
-        <PortfolioForm />
+        <PortfolioForm
+          ref={{ thumbRef, bannerRef, logoRef, videoRef }}
+          data={formData}
+          handleChange={handleFormField}
+        />
       </div>
 
       <div className="right-column">
