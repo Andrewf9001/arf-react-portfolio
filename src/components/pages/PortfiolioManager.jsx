@@ -12,7 +12,6 @@ const INITIAL_FORM_STATE = {
 };
 
 const PortfolioManager = () => {
-  // const [isLoading, setIsLoading] = useState();
   const [formData, setFormData] = useState(INITIAL_FORM_STATE);
 
   const thumbRef = useRef();
@@ -31,8 +30,6 @@ const PortfolioManager = () => {
     bannerRef.current.value = "";
     logoRef.current.value = "";
     videoRef.current.value = "";
-
-    // setIsLoading(false);
   };
 
   return (
@@ -41,6 +38,7 @@ const PortfolioManager = () => {
         <PortfolioForm
           ref={{ thumbRef, bannerRef, logoRef, videoRef }}
           data={formData}
+          clearForm={clearForm}
           handleChange={handleFormField}
         />
       </div>

@@ -1,38 +1,14 @@
-import { forwardRef, useRef, useState } from "react";
+import { forwardRef, useState } from "react";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { addDoc, collection } from "firebase/firestore";
 
 import { db, storage } from "../../services/firebase";
 
-const PortfolioForm = forwardRef(({ data, handleChange }, refs) => {
+const PortfolioForm = forwardRef((props, refs) => {
+  const { data, handleChange, clearForm } = props;
   const { thumbRef, bannerRef, logoRef, videoRef } = refs;
 
   const [isLoading, setIsLoading] = useState(false);
-  // const [description, setDescription] = useState("");
-  // const [category, setCategory] = useState("");
-  // const [urlText, setUrlText] = useState("");
-  // const [name, setName] = useState("");
-  // const [url, setUrl] = useState("");
-
-  // const thumbRef = useRef();
-  // const bannerRef = useRef();
-  // const logoRef = useRef();
-  // const videoRef = useRef();
-
-  // const clearForm = () => {
-  //   setDescription("");
-  //   setCategory("");
-  //   setUrlText("");
-  //   setName("");
-  //   setUrl("");
-
-  //   thumbRef.current.value = "";
-  //   bannerRef.current.value = "";
-  //   logoRef.current.value = "";
-  //   videoRef.current.value = "";
-
-  //   setIsLoading(false);
-  // };
 
   const uploadToStorage = async (file, path) => {
     const storageRef = ref(storage, `${path}/${file.name}`);
@@ -72,8 +48,10 @@ const PortfolioForm = forwardRef(({ data, handleChange }, refs) => {
       });
 
       clearForm();
+      setIsLoading(false);
     } catch (e) {
       console.error("Form Submission: ", e);
+      setIsLoading(false);
     }
   };
 
@@ -85,12 +63,13 @@ const PortfolioForm = forwardRef(({ data, handleChange }, refs) => {
           name="name"
           placeholder="Portfolio Item Name"
           value={data.name}
-          onChange={(e) => setName(e.target.value)}
+          onChange={(e) => handleChange(e.target.name, e.target.value)}
         />
 
         <select
+          name="category"
           value={data.category}
-          onChange={(e) => setCategory(e.target.value)}
+          onChange={(e) => handleChange(e.target.name, e.target.value)}
         >
           <option value="">Category</option>
           <option value="Hobbies">Hobbies</option>
@@ -104,15 +83,15 @@ const PortfolioForm = forwardRef(({ data, handleChange }, refs) => {
           name="url"
           placeholder="URL"
           value={data.url}
-          onChange={(e) => setUrl(e.target.value)}
+          onChange={(e) => handleChange(e.target.name, e.target.value)}
         />
 
         <input
           type="text"
-          name="url-text"
+          name="urlText"
           placeholder="URL Link Text"
           value={data.urlText}
-          onChange={(e) => setUrlText(e.target.value)}
+          onChange={(e) => handleChange(e.target.name, e.target.value)}
         />
       </div>
 
@@ -122,7 +101,7 @@ const PortfolioForm = forwardRef(({ data, handleChange }, refs) => {
           name="description"
           placeholder="Description..."
           value={data.description}
-          onChange={(e) => setDescription(e.target.value)}
+          onChange={(e) => handleChange(e.target.name, e.target.value)}
         />
       </div>
 
@@ -144,7 +123,9 @@ const PortfolioForm = forwardRef(({ data, handleChange }, refs) => {
         </div>
       </div>
 
-      <button>{isLoading ? "Uploading..." : "Save"}</button>
+      <button disabled={isLoading}>
+        {isLoading ? "Uploading..." : "Save"}
+      </button>
     </form>
   );
 });

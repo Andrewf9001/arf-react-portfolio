@@ -33,5 +33,9 @@
     &:hover {
       background-color: #1e7777;
     }
+
+    &:disabled {
+      background-color: lightgray;
+    }
   }
 }
