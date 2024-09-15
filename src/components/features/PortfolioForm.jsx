@@ -41,6 +41,7 @@ const PortfolioForm = forwardRef((props, refs) => {
         url: data.url,
         urlText: data.urlText,
         description: data.description,
+        category: data.category,
         thumbUrl,
         bannerUrl,
         logoUrl,

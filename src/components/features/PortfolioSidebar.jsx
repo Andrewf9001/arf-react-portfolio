@@ -2,7 +2,16 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useAppData } from "../../context/AppDataContext";
 
 const PortfolioSidebar = () => {
-  const { hobbies, projects } = useAppData();
+  const { hobbies, projects, getProjectData } = useAppData();
+
+  const testEdit = (id, category) => {
+    const getProjects = getProjectData(id, category);
+
+    console.log(
+      "getProjects",
+      getProjects.then((data) => console.log(data))
+    );
+  };
 
   const renderData = (data) => {
     return data?.map((item) => {
@@ -18,7 +27,10 @@ const PortfolioSidebar = () => {
             <div className="name">{item.name}</div>
 
             <div className="actions-wrapper">
-              <button className="edit">
+              <button
+                className="edit"
+                onClick={() => testEdit(item.id, item.category)}
+              >
                 <FontAwesomeIcon icon="fa-solid fa-edit" />
               </button>
 

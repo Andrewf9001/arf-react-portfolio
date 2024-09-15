@@ -32,6 +32,8 @@ const PortfolioManager = () => {
     videoRef.current.value = "";
   };
 
+  const updateFormForEdit = (data) => {};
+
   return (
     <div className="portfolio-manager-container">
       <div className="left-column">
