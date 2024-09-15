@@ -1,20 +1,21 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { addDoc, collection } from "firebase/firestore";
 
 import { db, storage } from "../../services/firebase";
 
 const PortfolioForm = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
   const [urlText, setUrlText] = useState("");
   const [name, setName] = useState("");
   const [url, setUrl] = useState("");
-  const [bannerImage, setBannerImage] = useState(null);
-  const [thumbImage, setThumbImage] = useState(null);
-  const [logoImage, setLogoImage] = useState(null);
-  const [video, setVideo] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
+
+  const thumbRef = useRef();
+  const bannerRef = useRef();
+  const logoRef = useRef();
+  const videoRef = useRef();
 
   const clearForm = () => {
     setDescription("");
@@ -22,10 +23,12 @@ const PortfolioForm = () => {
     setUrlText("");
     setName("");
     setUrl("");
-    setBannerImage(null);
-    setThumbImage(null);
-    setLogoImage(null);
-    setVideo(null);
+
+    thumbRef.current.value = "";
+    bannerRef.current.value = "";
+    logoRef.current.value = "";
+    videoRef.current.value = "";
+
     setIsLoading(false);
   };
 
@@ -35,6 +38,10 @@ const PortfolioForm = () => {
     return await getDownloadURL(snapshot.ref);
   };
 
+  const handleFile = (file, path) => {
+    return file ? uploadToStorage(file, path) : null;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
@@ -42,18 +49,14 @@ const PortfolioForm = () => {
     if (!category) return;
 
     try {
-      const videoUrl = video ? await uploadToStorage(video, "videos") : null;
-      const thumbUrl = thumbImage
-        ? await uploadToStorage(thumbImage, "thumbnails")
-        : null;
+      const thumbUrl = await handleFile(
+        thumbRef.current.files[0],
+        "thumbnails"
+      );
 
-      const bannerUrl = bannerImage
-        ? await uploadToStorage(bannerImage, "banners")
-        : null;
-
-      const logoUrl = logoImage
-        ? await uploadToStorage(logoImage, "logos")
-        : null;
+      const bannerUrl = await handleFile(bannerRef.current.files[0], "banners");
+      const logoUrl = await handleFile(logoRef.current.files[0], "logos");
+      const videoUrl = await handleFile(videoRef.current.files[0], "videos");
 
       await addDoc(collection(db, category), {
         name,
@@ -120,35 +123,19 @@ const PortfolioForm = () => {
 
       <div className="upload-wrapper">
         <div className="image-wrapper">
-          <input
-            type="file"
-            accept="image/*"
-            onChange={(e) => setThumbImage(e.target.files[0])}
-          />
+          <input ref={thumbRef} type="file" accept="image/*" />
         </div>
 
         <div className="image-wrapper">
-          <input
-            type="file"
-            accept="image/*"
-            onChange={(e) => setBannerImage(e.target.files[0])}
-          />
+          <input ref={bannerRef} type="file" accept="image/*" />
         </div>
 
         <div className="image-wrapper">
-          <input
-            type="file"
-            accept="image/*"
-            onChange={(e) => setLogoImage(e.target.files[0])}
-          />
+          <input ref={logoRef} type="file" accept="image/*" />
         </div>
 
         <div className="video-wrapper">
-          <input
-            type="file"
-            accept="video/*"
-            onChange={(e) => setVideo(e.target.files[0])}
-          />
+          <input ref={videoRef} type="file" accept="video/*" />
         </div>
       </div>
 

@@ -7,10 +7,13 @@ import Project from "./pages/Project";
 import About from "./pages/About";
 import Login from "./pages/Login";
 
+import { AppDataProvider } from "../context/AppDataContext";
 import { useAuth } from "../context/AuthContext";
 
+import { solidIcons } from "../assets/icons/solidIcons";
 import "../styles/main.scss";
-import { AppDataProvider } from "../context/AppDataContext";
+
+solidIcons();
 
 const App = () => {
   const { currentUser } = useAuth();

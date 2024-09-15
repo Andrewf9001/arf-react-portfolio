@@ -20,14 +20,58 @@
     }
 
     img {
-      width: 60%;
+      width: 100%;
       border-radius: 10px;
     }
 
     .text-content {
-      .name {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      margin-top: 5px;
+
+      .name,
+      button {
         font-size: 2rem;
       }
+
+      .name {
+        cursor: default;
+      }
+
+      .actions-wrapper {
+        display: flex;
+        gap: 10px;
+
+        button {
+          background-color: transparent;
+          border: 2px solid transparent;
+          border-radius: 5px;
+          transition: 0.3s ease-in-out;
+          cursor: pointer;
+        }
+
+        .edit {
+          color: #38c738;
+
+          &:hover {
+            color: #289028;
+          }
+        }
+
+        .delete {
+          color: #c21313;
+
+          &:hover {
+            color: #7e0c0c;
+          }
+        }
+      }
     }
+  }
+
+  &::-webkit-scrollbar {
+    width: 8px;
   }
 }

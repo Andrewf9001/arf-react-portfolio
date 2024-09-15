@@ -1,3 +1,4 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useAppData } from "../../context/AppDataContext";
 
 const PortfolioSidebar = () => {
@@ -17,8 +18,13 @@ const PortfolioSidebar = () => {
             <div className="name">{item.name}</div>
 
             <div className="actions-wrapper">
-              <button className="edit">Edit Fontawesome Icon</button>
-              <button className="delete">Trash Fontawesome Icon</button>
+              <button className="edit">
+                <FontAwesomeIcon icon="fa-solid fa-edit" />
+              </button>
+
+              <button className="delete">
+                <FontAwesomeIcon icon="fa-solid fa-trash" />
+              </button>
             </div>
           </div>
         </div>
