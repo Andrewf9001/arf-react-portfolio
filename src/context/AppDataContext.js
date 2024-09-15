@@ -1,5 +1,13 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { collection, onSnapshot } from "firebase/firestore";
+import { getStorage, ref, deleteObject } from "firebase/storage";
+import {
+  collection,
+  onSnapshot,
+  doc,
+  deleteDoc,
+  getFirestore,
+  getDoc,
+} from "firebase/firestore";
 
 import { db } from "../services/firebase";
 
@@ -8,6 +16,34 @@ const AppDataContext = createContext();
 export const AppDataProvider = ({ children }) => {
   const [hobbies, setHobbies] = useState(null);
   const [projects, setProjects] = useState(null);
+
+  const storage = getStorage();
+  const firestore = getFirestore();
+
+  const getProjectData = async (id, type) => {
+    const docRef = doc(firestore, type, id);
+    const docSnapshot = await getDoc(docRef);
+
+    if (docSnapshot.exists()) {
+      return docSnapshot.data();
+    } else {
+      return null;
+    }
+  };
+
+  const deleteProject = async (id, type, fileRefs) => {
+    try {
+      await Promise.all(
+        fileRefs.map((fileRef) => deleteObject(ref(storage, fileRef)))
+      );
+
+      await deleteDoc(doc(firestore, type, id));
+
+      console.log("Project and Files deleted successfully");
+    } catch (err) {
+      console.error("Error deleting project: ", err);
+    }
+  };
 
   useEffect(() => {
     const unsubscribeHobbies = onSnapshot(
@@ -49,6 +85,8 @@ export const AppDataProvider = ({ children }) => {
   const values = {
     hobbies,
     projects,
+    getProjectData,
+    deleteProject,
   };
 
   return (
