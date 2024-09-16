@@ -1,8 +1,6 @@
 import { forwardRef } from "react";
 
-const DragDropPad = forwardRef((props, ref) => {
-  const { children, accept, onSuccessfulDrop } = props;
-
+const DragDropPad = forwardRef(({ children, accept }, ref) => {
   return (
     <div className="drag-drop-container">
       <input ref={ref} type="file" accept={accept} />
@@ -13,5 +11,3 @@ const DragDropPad = forwardRef((props, ref) => {
 });
 
 export default DragDropPad;
-
-// children = what to say in pad
