@@ -36,6 +36,13 @@
 
     &:disabled {
       background-color: lightgray;
+      cursor: default;
     }
+  }
+
+  .upload-wrapper {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
   }
 }

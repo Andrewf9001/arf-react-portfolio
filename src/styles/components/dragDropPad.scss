@@ -1,0 +1,16 @@
+.drag-drop-container {
+  input {
+    display: none;
+  }
+
+  div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    width: 200px;
+    font-size: 1.2rem;
+    border: 1px dotted black;
+    border-radius: 10px;
+  }
+}
