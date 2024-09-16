@@ -2,6 +2,8 @@ import { forwardRef, useState } from "react";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { addDoc, collection } from "firebase/firestore";
 
+import DragDropPad from "../features/dropzone/DragDropPad";
+
 import { db, storage } from "../../services/firebase";
 
 const PortfolioForm = forwardRef((props, refs) => {
@@ -108,19 +110,27 @@ const PortfolioForm = forwardRef((props, refs) => {
 
       <div className="upload-wrapper">
         <div className="image-wrapper">
-          <input ref={thumbRef} type="file" accept="image/*" />
+          <DragDropPad accept="image/*" ref={thumbRef}>
+            <div>Thumb Image</div>
+          </DragDropPad>
         </div>
 
         <div className="image-wrapper">
-          <input ref={bannerRef} type="file" accept="image/*" />
+          <DragDropPad accept="image/*" ref={bannerRef}>
+            <div>Banner Image</div>
+          </DragDropPad>
         </div>
 
         <div className="image-wrapper">
-          <input ref={logoRef} type="file" accept="image/*" />
+          <DragDropPad accept="image/*" ref={logoRef}>
+            <div>Logo Image</div>
+          </DragDropPad>
         </div>
 
         <div className="video-wrapper">
-          <input ref={videoRef} type="file" accept="video/*" />
+          <DragDropPad accept="video/*" ref={videoRef}>
+            <div>Video</div>
+          </DragDropPad>
         </div>
       </div>
 

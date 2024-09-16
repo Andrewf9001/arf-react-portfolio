@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 
 import PortfolioSidebar from "../features/PortfolioSidebar";
-import PortfolioForm from "../features/PortfolioForm";
+import PortfolioForm from "../forms/PortfolioForm";
 
 const INITIAL_FORM_STATE = {
   name: "",
