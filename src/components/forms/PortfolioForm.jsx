@@ -109,29 +109,21 @@ const PortfolioForm = forwardRef((props, refs) => {
       </div>
 
       <div className="upload-wrapper">
-        <div className="image-wrapper">
-          <DragDropPad accept="image/*" ref={thumbRef}>
-            <div>Thumb Image</div>
-          </DragDropPad>
-        </div>
+        <DragDropPad accept="image/*" ref={thumbRef}>
+          <div>Thumb Image</div>
+        </DragDropPad>
 
-        <div className="image-wrapper">
-          <DragDropPad accept="image/*" ref={bannerRef}>
-            <div>Banner Image</div>
-          </DragDropPad>
-        </div>
+        <DragDropPad accept="image/*" ref={bannerRef}>
+          <div>Banner Image</div>
+        </DragDropPad>
 
-        <div className="image-wrapper">
-          <DragDropPad accept="image/*" ref={logoRef}>
-            <div>Logo Image</div>
-          </DragDropPad>
-        </div>
+        <DragDropPad accept="image/*" ref={logoRef}>
+          <div>Logo Image</div>
+        </DragDropPad>
 
-        <div className="video-wrapper">
-          <DragDropPad accept="video/*" ref={videoRef}>
-            <div>Video</div>
-          </DragDropPad>
-        </div>
+        <DragDropPad accept="video/*" ref={videoRef}>
+          <div>Video</div>
+        </DragDropPad>
       </div>
 
       <button disabled={isLoading}>
