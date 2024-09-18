@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import PortfolioSidebar from "../features/PortfolioSidebar";
 import PortfolioForm from "../forms/PortfolioForm";
@@ -18,18 +18,12 @@ const PortfolioManager = () => {
 
   const handleFileUpload = (section, file, preview) => {
     setFiles((prev) => {
-      switch (section) {
-        case "thumb":
-          return { ...prev, thumb: { file, preview } };
-        case "banner":
-          return { ...prev, banner: { file, preview } };
-        case "logo":
-          return { ...prev, logo: { file, preview } };
-        case "video":
-          return { ...prev, video: { file, preview } };
-        default:
-          return prev;
-      }
+      cleanupPreviewUrl(prev[section].preview);
+
+      return {
+        ...prev,
+        [section]: { file, preview },
+      };
     });
   };
 
@@ -38,9 +32,24 @@ const PortfolioManager = () => {
     setFiles(INITIAL_FILE_STATE);
   };
 
+  const cleanupPreviewUrl = (url) => {
+    if (url) {
+      console.log("url", url);
+      URL.revokeObjectURL(url);
+    }
+  };
+
   console.log("files", files);
 
   const updateFormForEdit = (data) => {};
+
+  useEffect(() => {
+    return () => {
+      Object.values(files).forEach(({ preview }) => {
+        cleanupPreviewUrl(preview);
+      });
+    };
+  }, [files]);
 
   return (
     <div className="portfolio-manager-container">

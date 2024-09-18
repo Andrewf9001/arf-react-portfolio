@@ -6,9 +6,6 @@ const DragDropPad = ({ children, imageType, accept, onSuccessfulDrop }) => {
   const handleOnDrop = (e) => {
     e.preventDefault();
 
-    console.log("e", e.target.type);
-    console.log("e", e);
-
     const droppedFiles =
       e.target.type === "file" ? e.target.files : e.dataTransfer.files;
 
@@ -35,16 +32,9 @@ const DragDropPad = ({ children, imageType, accept, onSuccessfulDrop }) => {
         onChange={handleOnDrop}
       />
 
-      {children}
+      {children ? children : <div>Click or Drop image</div>}
     </div>
   );
 };
 
 export default DragDropPad;
-
-/* 
-  TODO:
-    - build onSuccessfulDrop function
-    - Identify how to set the images to the refs
-    - create previews when an image is selected
-*/

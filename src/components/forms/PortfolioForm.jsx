@@ -54,7 +54,7 @@ const PortfolioForm = (props) => {
   };
 
   const onSuccessfulDrop = (file, type) => {
-    const preview = URL.createObjectURL(file);
+    const preview = file ? URL.createObjectURL(file) : "";
 
     handleFileUpload(type, file, preview);
   };
@@ -110,36 +110,54 @@ const PortfolioForm = (props) => {
       </div>
 
       <div className="upload-wrapper">
-        <DragDropPad
-          imageType="thumb"
-          accept="image/*"
-          onSuccessfulDrop={onSuccessfulDrop}
-        >
+        <div className="drop-wrapper">
           <div>Thumb Image</div>
-        </DragDropPad>
+          <DragDropPad
+            imageType="thumb"
+            accept="image/*"
+            onSuccessfulDrop={onSuccessfulDrop}
+          >
+            {files.thumb.preview && (
+              <img src={files.thumb.preview} alt="Portfolio Item Thumbnail" />
+            )}
+          </DragDropPad>
+        </div>
 
-        <DragDropPad
-          imageType="banner"
-          accept="image/*"
-          onSuccessfulDrop={onSuccessfulDrop}
-        >
+        <div className="drop-wrapper">
           <div>Banner Image</div>
-        </DragDropPad>
+          <DragDropPad
+            imageType="banner"
+            accept="image/*"
+            onSuccessfulDrop={onSuccessfulDrop}
+          >
+            {files.banner.preview && (
+              <img src={files.banner.preview} alt="Portfolio Item Banner" />
+            )}
+          </DragDropPad>
+        </div>
 
-        <DragDropPad
-          imageType="logo"
-          accept="image/*"
-          onSuccessfulDrop={onSuccessfulDrop}
-        >
+        <div className="drop-wrapper">
           <div>Logo Image</div>
-        </DragDropPad>
+          <DragDropPad
+            imageType="logo"
+            accept="image/*"
+            onSuccessfulDrop={onSuccessfulDrop}
+          >
+            {files.logo.preview && (
+              <img src={files.logo.preview} alt="Portfolio Item Logo" />
+            )}
+          </DragDropPad>
+        </div>
+      </div>
 
+      <div className="video-upload-wrapper">
+        <div>Video</div>
         <DragDropPad
           imageType="video"
           accept="video/*"
           onSuccessfulDrop={onSuccessfulDrop}
         >
-          <div>Video</div>
+          {files.video.preview && <video controls src={files.video.preview} />}
         </DragDropPad>
       </div>
 
