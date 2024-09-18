@@ -35,11 +35,7 @@ const PortfolioManager = () => {
 
   const clearForm = () => {
     setFormData(INITIAL_FORM_STATE);
-
-    thumbRef.current.value = "";
-    bannerRef.current.value = "";
-    logoRef.current.value = "";
-    videoRef.current.value = "";
+    setFiles(INITIAL_FILE_STATE);
   };
 
   const updateFormForEdit = (data) => {};
