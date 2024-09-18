@@ -38,6 +38,8 @@ const PortfolioManager = () => {
     setFiles(INITIAL_FILE_STATE);
   };
 
+  console.log("files", files);
+
   const updateFormForEdit = (data) => {};
 
   return (

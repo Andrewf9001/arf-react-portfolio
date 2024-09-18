@@ -1,19 +1,20 @@
 import { useRef } from "react";
 
-const DragDropPad = ({ children, accept, onSuccessfulDrop }) => {
+const DragDropPad = ({ children, imageType, accept, onSuccessfulDrop }) => {
   const inputRef = useRef(null);
 
   const handleOnDrop = (e) => {
     e.preventDefault();
 
+    console.log("e", e.target.type);
+    console.log("e", e);
+
     const droppedFiles =
       e.target.type === "file" ? e.target.files : e.dataTransfer.files;
 
-    console.log("dropped files", droppedFiles);
-
-    // if (droppedFiles) {
-    //   ref.current;
-    // }
+    if (droppedFiles) {
+      onSuccessfulDrop(droppedFiles[0], imageType);
+    }
   };
 
   const handleOnDragOver = (e) => {

@@ -53,7 +53,11 @@ const PortfolioForm = (props) => {
     }
   };
 
-  const onSuccessfulDrop = () => {};
+  const onSuccessfulDrop = (file, type) => {
+    const preview = URL.createObjectURL(file);
+
+    handleFileUpload(type, file, preview);
+  };
 
   return (
     <form className="portfolio-form-container" onSubmit={handleSubmit}>
@@ -106,19 +110,35 @@ const PortfolioForm = (props) => {
       </div>
 
       <div className="upload-wrapper">
-        <DragDropPad accept="image/*" onSuccessfulDrop={null}>
+        <DragDropPad
+          imageType="thumb"
+          accept="image/*"
+          onSuccessfulDrop={onSuccessfulDrop}
+        >
           <div>Thumb Image</div>
         </DragDropPad>
 
-        <DragDropPad accept="image/*" onSuccessfulDrop={null}>
+        <DragDropPad
+          imageType="banner"
+          accept="image/*"
+          onSuccessfulDrop={onSuccessfulDrop}
+        >
           <div>Banner Image</div>
         </DragDropPad>
 
-        <DragDropPad accept="image/*" onSuccessfulDrop={null}>
+        <DragDropPad
+          imageType="logo"
+          accept="image/*"
+          onSuccessfulDrop={onSuccessfulDrop}
+        >
           <div>Logo Image</div>
         </DragDropPad>
 
-        <DragDropPad accept="video/*" onSuccessfulDrop={null}>
+        <DragDropPad
+          imageType="video"
+          accept="video/*"
+          onSuccessfulDrop={onSuccessfulDrop}
+        >
           <div>Video</div>
         </DragDropPad>
       </div>
