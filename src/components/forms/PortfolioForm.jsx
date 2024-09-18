@@ -1,4 +1,4 @@
-import { forwardRef, useState } from "react";
+import { useState } from "react";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { addDoc, collection } from "firebase/firestore";
 
@@ -6,9 +6,8 @@ import DragDropPad from "../features/dropzone/DragDropPad";
 
 import { db, storage } from "../../services/firebase";
 
-const PortfolioForm = forwardRef((props, refs) => {
-  const { data, handleChange, clearForm } = props;
-  const { thumbRef, bannerRef, logoRef, videoRef } = refs;
+const PortfolioForm = (props) => {
+  const { files, data, clearForm, handleChange, handleFileUpload } = props;
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -29,14 +28,10 @@ const PortfolioForm = forwardRef((props, refs) => {
     if (!data.category) return;
 
     try {
-      const thumbUrl = await handleFile(
-        thumbRef.current.files[0],
-        "thumbnails"
-      );
-
-      const bannerUrl = await handleFile(bannerRef.current.files[0], "banners");
-      const logoUrl = await handleFile(logoRef.current.files[0], "logos");
-      const videoUrl = await handleFile(videoRef.current.files[0], "videos");
+      const thumbUrl = await handleFile(files.thumb.file, "thumbnails");
+      const bannerUrl = await handleFile(files.banner.file, "banners");
+      const logoUrl = await handleFile(files.logo.file, "logos");
+      const videoUrl = await handleFile(files.video.file, "videos");
 
       await addDoc(collection(db, data.category), {
         name: data.name,
@@ -57,6 +52,8 @@ const PortfolioForm = forwardRef((props, refs) => {
       setIsLoading(false);
     }
   };
+
+  const onSuccessfulDrop = () => {};
 
   return (
     <form className="portfolio-form-container" onSubmit={handleSubmit}>
@@ -109,19 +106,19 @@ const PortfolioForm = forwardRef((props, refs) => {
       </div>
 
       <div className="upload-wrapper">
-        <DragDropPad accept="image/*">
+        <DragDropPad accept="image/*" onSuccessfulDrop={null}>
           <div>Thumb Image</div>
         </DragDropPad>
 
-        <DragDropPad accept="image/*">
+        <DragDropPad accept="image/*" onSuccessfulDrop={null}>
           <div>Banner Image</div>
         </DragDropPad>
 
-        <DragDropPad accept="image/*">
+        <DragDropPad accept="image/*" onSuccessfulDrop={null}>
           <div>Logo Image</div>
         </DragDropPad>
 
-        <DragDropPad accept="video/*">
+        <DragDropPad accept="video/*" onSuccessfulDrop={null}>
           <div>Video</div>
         </DragDropPad>
       </div>
@@ -131,6 +128,6 @@ const PortfolioForm = forwardRef((props, refs) => {
       </button>
     </form>
   );
-});
+};
 
 export default PortfolioForm;

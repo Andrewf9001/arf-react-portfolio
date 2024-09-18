@@ -1,26 +1,36 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 
 import PortfolioSidebar from "../features/PortfolioSidebar";
 import PortfolioForm from "../forms/PortfolioForm";
 
-const INITIAL_FORM_STATE = {
-  name: "",
-  description: "",
-  category: "",
-  urlText: "",
-  url: "",
-};
+import {
+  INITIAL_FILE_STATE,
+  INITIAL_FORM_STATE,
+} from "../../helpers/portfolioHelpers";
 
 const PortfolioManager = () => {
   const [formData, setFormData] = useState(INITIAL_FORM_STATE);
-
-  const thumbRef = useRef();
-  const bannerRef = useRef();
-  const logoRef = useRef();
-  const videoRef = useRef();
+  const [files, setFiles] = useState(INITIAL_FILE_STATE);
 
   const handleFormField = (name, value) => {
     setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleFileUpload = (section, file, preview) => {
+    setFiles((prev) => {
+      switch (section) {
+        case "thumb":
+          return { ...prev, thumb: { file, preview } };
+        case "banner":
+          return { ...prev, banner: { file, preview } };
+        case "logo":
+          return { ...prev, logo: { file, preview } };
+        case "video":
+          return { ...prev, video: { file, preview } };
+        default:
+          return prev;
+      }
+    });
   };
 
   const clearForm = () => {
@@ -38,10 +48,11 @@ const PortfolioManager = () => {
     <div className="portfolio-manager-container">
       <div className="left-column">
         <PortfolioForm
-          ref={{ thumbRef, bannerRef, logoRef, videoRef }}
+          files={files}
           data={formData}
           clearForm={clearForm}
           handleChange={handleFormField}
+          handleFileUpload={handleFileUpload}
         />
       </div>
 
