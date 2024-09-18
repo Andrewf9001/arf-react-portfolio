@@ -39,8 +39,6 @@ const PortfolioManager = () => {
     }
   };
 
-  console.log("files", files);
-
   const updateFormForEdit = (data) => {};
 
   useEffect(() => {
