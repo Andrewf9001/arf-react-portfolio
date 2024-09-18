@@ -1,15 +1,19 @@
-import { forwardRef } from "react";
+import { useRef } from "react";
 
-const DragDropPad = forwardRef(({ children, accept }, ref) => {
-  const handleOnDrop = () => {
+const DragDropPad = ({ children, accept, onSuccessfulDrop }) => {
+  const inputRef = useRef(null);
+
+  const handleOnDrop = (e) => {
     e.preventDefault();
 
     const droppedFiles =
       e.target.type === "file" ? e.target.files : e.dataTransfer.files;
 
-    if (droppedFiles) {
-      ref.current;
-    }
+    console.log("dropped files", droppedFiles);
+
+    // if (droppedFiles) {
+    //   ref.current;
+    // }
   };
 
   const handleOnDragOver = (e) => {
@@ -19,15 +23,21 @@ const DragDropPad = forwardRef(({ children, accept }, ref) => {
   return (
     <div
       className="drag-drop-container"
+      onClick={() => inputRef.current.click()}
       onDragOver={handleOnDragOver}
       onDrop={handleOnDrop}
     >
-      <input ref={ref} type="file" accept={accept} />
+      <input
+        type="file"
+        ref={inputRef}
+        accept={accept}
+        onChange={handleOnDrop}
+      />
 
       {children}
     </div>
   );
-});
+};
 
 export default DragDropPad;
 
