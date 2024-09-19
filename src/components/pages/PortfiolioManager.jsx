@@ -127,3 +127,6 @@ export default PortfolioManager;
       - Activate / Deactivate which projects to show
       - Update the About page (or any page with details) possibly
 */
+
+// TODO: When editing if you remove file it removes all
+// Cleanup data, utilizing same images is causing issues with deleting as firebase recognizes the same image
