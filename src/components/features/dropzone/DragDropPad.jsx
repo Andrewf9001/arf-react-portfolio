@@ -32,7 +32,11 @@ const DragDropPad = ({ children, imageType, accept, onSuccessfulDrop }) => {
         onChange={handleOnDrop}
       />
 
-      {children ? children : <div>Click or Drop image</div>}
+      {children ? (
+        children
+      ) : (
+        <div>Click or Drop {imageType === "video" ? "video" : "image"}</div>
+      )}
     </div>
   );
 };
