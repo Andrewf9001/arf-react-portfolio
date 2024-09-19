@@ -7,6 +7,8 @@ import {
   deleteDoc,
   getFirestore,
   getDoc,
+  updateDoc,
+  addDoc,
 } from "firebase/firestore";
 
 import { db } from "../services/firebase";
@@ -28,6 +30,30 @@ export const AppDataProvider = ({ children }) => {
       return docSnapshot.data();
     } else {
       return null;
+    }
+  };
+
+  const addProject = async (data) => {
+    try {
+      const docRef = collection(db, data.category);
+
+      await addDoc(docRef, data);
+
+      console.log("Project Added");
+    } catch (err) {
+      console.error("Add New Project: ", err);
+    }
+  };
+
+  const updateProject = async (id, data) => {
+    try {
+      const docRef = doc(db, data.category, id);
+
+      await updateDoc(docRef, data);
+
+      console.log("Update successful");
+    } catch (err) {
+      console.error("Error updating portfolio item: ", err);
     }
   };
 
@@ -86,6 +112,8 @@ export const AppDataProvider = ({ children }) => {
     hobbies,
     projects,
     getProjectData,
+    addProject,
+    updateProject,
     deleteProject,
   };
 

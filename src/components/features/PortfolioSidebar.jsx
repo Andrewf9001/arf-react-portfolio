@@ -7,7 +7,7 @@ const PortfolioSidebar = ({ setPorfolioItem }) => {
   const getPortfolioItem = (id, category) => {
     const getProjects = getProjectData(id, category);
 
-    getProjects.then((data) => setPorfolioItem(data));
+    getProjects.then((data) => setPorfolioItem(id, data));
   };
 
   const renderData = (data) => {

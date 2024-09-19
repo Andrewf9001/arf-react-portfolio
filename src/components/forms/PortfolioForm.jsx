@@ -5,11 +5,13 @@ import { addDoc, collection } from "firebase/firestore";
 import DragDropPad from "../features/dropzone/DragDropPad";
 
 import { db, storage } from "../../services/firebase";
+import { useAppData } from "../../context/AppDataContext";
 
 const PortfolioForm = (props) => {
-  const { files, data, clearForm, handleChange, handleFileUpload } = props;
-
+  const { files, formData, clearForm, handleChange, handleFileUpload } = props;
   const [isLoading, setIsLoading] = useState(false);
+
+  const { addProject, updateProject } = useAppData();
 
   const uploadToStorage = async (file, path) => {
     const storageRef = ref(storage, `${path}/${file.name}`);
@@ -25,25 +27,46 @@ const PortfolioForm = (props) => {
     e.preventDefault();
     setIsLoading(true);
 
-    if (!data.category) return;
+    if (!formData.category) return;
 
     try {
-      const thumbUrl = await handleFile(files.thumb.file, "thumbnails");
-      const bannerUrl = await handleFile(files.banner.file, "banners");
-      const logoUrl = await handleFile(files.logo.file, "logos");
-      const videoUrl = await handleFile(files.video.file, "videos");
+      const thumbUrl = formData.id
+        ? files.thumb.preview
+        : files.thumb.file
+        ? await handleFile(files.thumb.file, "thumbnails")
+        : null;
 
-      await addDoc(collection(db, data.category), {
-        name: data.name,
-        url: data.url,
-        urlText: data.urlText,
-        description: data.description,
-        category: data.category,
+      const bannerUrl = formData.id
+        ? files.banner.preview
+        : files.banner.file
+        ? await handleFile(files.banner.file, "banners")
+        : null;
+
+      const logoUrl = formData.id
+        ? files.logo.preview
+        : files.logo.file
+        ? await handleFile(files.logo.file, "logos")
+        : null;
+
+      const videoUrl = formData.id
+        ? files.video.preview
+        : files.video.file
+        ? await handleFile(files.video.file, "videos")
+        : null;
+
+      const data = {
+        name: formData.name,
+        url: formData.url,
+        urlText: formData.urlText,
+        description: formData.description,
+        category: formData.category,
         thumbUrl,
         bannerUrl,
         logoUrl,
         videoUrl,
-      });
+      };
+
+      formData.id ? updateProject(formData.id, data) : addProject(data);
 
       clearForm();
       setIsLoading(false);
@@ -51,6 +74,24 @@ const PortfolioForm = (props) => {
       console.error("Form Submission: ", e);
       setIsLoading(false);
     }
+
+    // try {
+
+    //   await addDoc(collection(db, data.category), {
+    //     name: data.name,
+    //     url: data.url,
+    //     urlText: data.urlText,
+    //     description: data.description,
+    //     category: data.category,
+    //     thumbUrl,
+    //     bannerUrl,
+    //     logoUrl,
+    //     videoUrl,
+    //   });
+
+    //   clearForm();
+    //   setIsLoading(false);
+    // }
   };
 
   const onSuccessfulDrop = (file, type) => {
@@ -66,13 +107,13 @@ const PortfolioForm = (props) => {
           type="text"
           name="name"
           placeholder="Portfolio Item Name"
-          value={data.name}
+          value={formData.name}
           onChange={(e) => handleChange(e.target.name, e.target.value)}
         />
 
         <select
           name="category"
-          value={data.category}
+          value={formData.category}
           onChange={(e) => handleChange(e.target.name, e.target.value)}
         >
           <option value="">Category</option>
@@ -86,7 +127,7 @@ const PortfolioForm = (props) => {
           type="text"
           name="url"
           placeholder="URL"
-          value={data.url}
+          value={formData.url}
           onChange={(e) => handleChange(e.target.name, e.target.value)}
         />
 
@@ -94,7 +135,7 @@ const PortfolioForm = (props) => {
           type="text"
           name="urlText"
           placeholder="URL Link Text"
-          value={data.urlText}
+          value={formData.urlText}
           onChange={(e) => handleChange(e.target.name, e.target.value)}
         />
       </div>
@@ -104,7 +145,7 @@ const PortfolioForm = (props) => {
           type="text"
           name="description"
           placeholder="Description..."
-          value={data.description}
+          value={formData.description}
           onChange={(e) => handleChange(e.target.name, e.target.value)}
         />
       </div>

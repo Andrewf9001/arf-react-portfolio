@@ -12,6 +12,8 @@ const PortfolioManager = () => {
   const [formData, setFormData] = useState(INITIAL_FORM_STATE);
   const [files, setFiles] = useState(INITIAL_FILE_STATE);
 
+  console.log("formData", formData);
+
   const handleFormField = (name, value) => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
@@ -34,12 +36,11 @@ const PortfolioManager = () => {
 
   const cleanupPreviewUrl = (url) => {
     if (url) {
-      console.log("url", url);
       URL.revokeObjectURL(url);
     }
   };
 
-  const setPorfolioItem = (data) => {
+  const setPorfolioItem = (id, data) => {
     const {
       bannerUrl,
       category,
@@ -53,6 +54,7 @@ const PortfolioManager = () => {
     } = data;
 
     setFormData({
+      id,
       name,
       description,
       category,
@@ -93,7 +95,7 @@ const PortfolioManager = () => {
       <div className="left-column">
         <PortfolioForm
           files={files}
-          data={formData}
+          formData={formData}
           clearForm={clearForm}
           handleChange={handleFormField}
           handleFileUpload={handleFileUpload}
