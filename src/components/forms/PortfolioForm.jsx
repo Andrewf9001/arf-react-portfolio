@@ -8,9 +8,16 @@ import { db, storage } from "../../services/firebase";
 import { useAppData } from "../../context/AppDataContext";
 
 const PortfolioForm = (props) => {
-  const { files, formData, clearForm, handleChange, handleFileUpload } = props;
-  const [isLoading, setIsLoading] = useState(false);
+  const {
+    files,
+    formData,
+    clearForm,
+    removeFile,
+    handleChange,
+    handleFileUpload,
+  } = props;
 
+  const [isLoading, setIsLoading] = useState(false);
   const { addProject, updateProject } = useAppData();
 
   const uploadToStorage = async (file, path) => {
@@ -162,6 +169,8 @@ const PortfolioForm = (props) => {
               <img src={files.thumb.preview} alt="Portfolio Item Thumbnail" />
             )}
           </DragDropPad>
+
+          <button onClick={() => removeFile("thumb")}>Remove file</button>
         </div>
 
         <div className="drop-wrapper">
@@ -175,6 +184,8 @@ const PortfolioForm = (props) => {
               <img src={files.banner.preview} alt="Portfolio Item Banner" />
             )}
           </DragDropPad>
+
+          <button onClick={() => removeFile("banner")}>Remove file</button>
         </div>
 
         <div className="drop-wrapper">
@@ -188,6 +199,8 @@ const PortfolioForm = (props) => {
               <img src={files.logo.preview} alt="Portfolio Item Logo" />
             )}
           </DragDropPad>
+
+          <button onClick={() => removeFile("logo")}>Remove file</button>
         </div>
       </div>
 
@@ -200,6 +213,8 @@ const PortfolioForm = (props) => {
         >
           {files.video.preview && <video controls src={files.video.preview} />}
         </DragDropPad>
+
+        <button onClick={() => removeFile("video")}>Remove file</button>
       </div>
 
       <button disabled={isLoading}>

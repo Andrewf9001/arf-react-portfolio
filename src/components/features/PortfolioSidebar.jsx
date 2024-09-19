@@ -2,13 +2,20 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useAppData } from "../../context/AppDataContext";
 
 const PortfolioSidebar = ({ setPorfolioItem }) => {
-  const { hobbies, projects, getProjectData } = useAppData();
+  const { hobbies, projects, getProjectData, deleteProject } = useAppData();
 
   const getPortfolioItem = (id, category) => {
     const getProjects = getProjectData(id, category);
 
     getProjects.then((data) => setPorfolioItem(id, data));
   };
+
+  const getFilePaths = (data) => ({
+    thumbPath: data.thumbUrl,
+    bannerPath: data.bannerUrl,
+    logoPath: data.logoUrl,
+    videoPath: data.videoUrl,
+  });
 
   const renderData = (data) => {
     return data?.map((item) => {
@@ -31,7 +38,12 @@ const PortfolioSidebar = ({ setPorfolioItem }) => {
                 <FontAwesomeIcon icon="fa-solid fa-edit" />
               </button>
 
-              <button className="delete">
+              <button
+                className="delete"
+                onClick={() =>
+                  deleteProject(item.id, item.category, getFilePaths(item))
+                }
+              >
                 <FontAwesomeIcon icon="fa-solid fa-trash" />
               </button>
             </div>
@@ -45,6 +57,8 @@ const PortfolioSidebar = ({ setPorfolioItem }) => {
     <div className="portfolio-sidebar-container">
       {renderData(hobbies)}
       {renderData(projects)}
+
+      {/* Create Modal for this spot when deleting */}
     </div>
   );
 };

@@ -57,15 +57,30 @@ export const AppDataProvider = ({ children }) => {
     }
   };
 
-  const deleteProject = async (id, type, fileRefs) => {
+  const deleteProject = async (id, category, filePaths) => {
+    const { thumbPath, bannerPath, logoPath, videoPath } = filePaths;
+
     try {
-      await Promise.all(
-        fileRefs.map((fileRef) => deleteObject(ref(storage, fileRef)))
-      );
+      const deleteFile = async (filePath) => {
+        if (filePath) {
+          const fileRef = ref(storage, filePath);
 
-      await deleteDoc(doc(firestore, type, id));
+          await deleteObject(fileRef);
+        }
+      };
 
-      console.log("Project and Files deleted successfully");
+      await Promise.all([
+        deleteFile(thumbPath),
+        deleteFile(bannerPath),
+        deleteFile(logoPath),
+        deleteFile(videoPath),
+      ]);
+
+      const docRef = doc(db, category, id);
+
+      await deleteDoc(docRef);
+
+      console.log("Project and associated files deleted");
     } catch (err) {
       console.error("Error deleting project: ", err);
     }

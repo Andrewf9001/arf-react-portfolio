@@ -12,8 +12,6 @@ const PortfolioManager = () => {
   const [formData, setFormData] = useState(INITIAL_FORM_STATE);
   const [files, setFiles] = useState(INITIAL_FILE_STATE);
 
-  console.log("formData", formData);
-
   const handleFormField = (name, value) => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
@@ -27,6 +25,12 @@ const PortfolioManager = () => {
         [section]: { file, preview },
       };
     });
+  };
+
+  const removeFile = (category) => {
+    const defaultState = { file: null, preview: "" };
+
+    setFiles((prev) => ({ ...prev, [category]: defaultState }));
   };
 
   const clearForm = () => {
@@ -97,6 +101,7 @@ const PortfolioManager = () => {
           files={files}
           formData={formData}
           clearForm={clearForm}
+          removeFile={removeFile}
           handleChange={handleFormField}
           handleFileUpload={handleFileUpload}
         />
