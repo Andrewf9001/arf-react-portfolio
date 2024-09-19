@@ -39,7 +39,46 @@ const PortfolioManager = () => {
     }
   };
 
-  const updateFormForEdit = (data) => {};
+  const setPorfolioItem = (data) => {
+    const {
+      bannerUrl,
+      category,
+      description,
+      logoUrl,
+      name,
+      thumbUrl,
+      url,
+      urlText,
+      videoUrl,
+    } = data;
+
+    setFormData({
+      name,
+      description,
+      category,
+      urlText,
+      url,
+    });
+
+    setFiles({
+      thumb: {
+        file: null,
+        preview: thumbUrl,
+      },
+      banner: {
+        file: null,
+        preview: bannerUrl,
+      },
+      logo: {
+        file: null,
+        preview: logoUrl,
+      },
+      video: {
+        file: null,
+        preview: videoUrl,
+      },
+    });
+  };
 
   useEffect(() => {
     return () => {
@@ -62,7 +101,7 @@ const PortfolioManager = () => {
       </div>
 
       <div className="right-column">
-        <PortfolioSidebar />
+        <PortfolioSidebar setPorfolioItem={setPorfolioItem} />
       </div>
     </div>
   );
