@@ -1,12 +1,6 @@
 import { useRef } from "react";
 
-const DragDropPad = ({
-  children,
-  imageType,
-  accept,
-  onSuccessfulDrop,
-  onImageRemove,
-}) => {
+const DragDropPad = ({ children, imageType, accept, onSuccessfulDrop }) => {
   const inputRef = useRef(null);
 
   const handleOnDrop = (e) => {
@@ -24,11 +18,6 @@ const DragDropPad = ({
     e.preventDefault();
   };
 
-  const resetInputRef = () => {
-    inputRef.current = "";
-  };
-
-  console.log("inputRef.current", inputRef.current);
   return (
     <>
       <div
@@ -50,12 +39,6 @@ const DragDropPad = ({
           <div>Click or Drop {imageType === "video" ? "video" : "image"}</div>
         )}
       </div>
-
-      {children && (
-        <button onClick={(e) => onImageRemove(e, imageType, resetInputRef)}>
-          Remove file
-        </button>
-      )}
     </>
   );
 };

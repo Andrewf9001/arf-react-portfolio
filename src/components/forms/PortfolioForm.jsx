@@ -20,7 +20,6 @@ const PortfolioForm = (props) => {
   const { addProject, updateProject } = useAppData();
 
   const uploadToStorage = async (file, path) => {
-    console.log("uploadToStorage");
     const storageRef = ref(storage, `${path}/${file.name}`);
     const snapshot = await uploadBytes(storageRef, file);
     return await getDownloadURL(snapshot.ref);
@@ -34,33 +33,31 @@ const PortfolioForm = (props) => {
     e.preventDefault();
     setIsLoading(true);
 
-    console.log("handleSubmit");
-
     if (!formData.category) return;
 
     try {
-      const thumbUrl = formData.id
-        ? files.thumb.preview
-        : files.thumb.file
+      const thumbUrl = files.thumb.file
         ? await handleFile(files.thumb.file, "thumbnails")
+        : formData.id
+        ? files.thumb.preview
         : null;
 
-      const bannerUrl = formData.id
-        ? files.banner.preview
-        : files.banner.file
+      const bannerUrl = files.banner.file
         ? await handleFile(files.banner.file, "banners")
+        : formData.id
+        ? files.banner.preview
         : null;
 
-      const logoUrl = formData.id
-        ? files.logo.preview
-        : files.logo.file
+      const logoUrl = files.logo.file
         ? await handleFile(files.logo.file, "logos")
+        : formData.id
+        ? files.logo.preview
         : null;
 
-      const videoUrl = formData.id
-        ? files.video.preview
-        : files.video.file
+      const videoUrl = files.video.file
         ? await handleFile(files.video.file, "videos")
+        : formData.id
+        ? files.video.preview
         : null;
 
       const data = {
@@ -75,7 +72,6 @@ const PortfolioForm = (props) => {
         videoUrl,
       };
 
-      console.log("formId", formData.id ? true : false);
       formData.id ? updateProject(formData.id, data) : addProject(data);
 
       clearForm();
@@ -84,24 +80,6 @@ const PortfolioForm = (props) => {
       console.error("Form Submission: ", e);
       setIsLoading(false);
     }
-
-    // try {
-
-    //   await addDoc(collection(db, data.category), {
-    //     name: data.name,
-    //     url: data.url,
-    //     urlText: data.urlText,
-    //     description: data.description,
-    //     category: data.category,
-    //     thumbUrl,
-    //     bannerUrl,
-    //     logoUrl,
-    //     videoUrl,
-    //   });
-
-    //   clearForm();
-    //   setIsLoading(false);
-    // }
   };
 
   const onSuccessfulDrop = (file, type) => {
@@ -167,14 +145,15 @@ const PortfolioForm = (props) => {
             imageType="thumb"
             accept="image/*"
             onSuccessfulDrop={onSuccessfulDrop}
-            onImageRemove={removeFile}
           >
             {files.thumb.preview && (
               <img src={files.thumb.preview} alt="Portfolio Item Thumbnail" />
             )}
           </DragDropPad>
 
-          {/* <button onClick={(e) => removeFile(e, "thumb")}>Remove file</button> */}
+          {files.thumb.preview && (
+            <button onClick={(e) => removeFile(e, "thumb")}>Remove file</button>
+          )}
         </div>
 
         <div className="drop-wrapper">
@@ -183,14 +162,17 @@ const PortfolioForm = (props) => {
             imageType="banner"
             accept="image/*"
             onSuccessfulDrop={onSuccessfulDrop}
-            onImageRemove={removeFile}
           >
             {files.banner.preview && (
               <img src={files.banner.preview} alt="Portfolio Item Banner" />
             )}
           </DragDropPad>
 
-          {/* <button onClick={(e) => removeFile(e, "banner")}>Remove file</button> */}
+          {files.banner.preview && (
+            <button onClick={(e) => removeFile(e, "banner")}>
+              Remove file
+            </button>
+          )}
         </div>
 
         <div className="drop-wrapper">
@@ -199,14 +181,15 @@ const PortfolioForm = (props) => {
             imageType="logo"
             accept="image/*"
             onSuccessfulDrop={onSuccessfulDrop}
-            onImageRemove={removeFile}
           >
             {files.logo.preview && (
               <img src={files.logo.preview} alt="Portfolio Item Logo" />
             )}
           </DragDropPad>
 
-          {/* <button onClick={(e) => removeFile(e, "logo")}>Remove file</button> */}
+          {files.logo.preview && (
+            <button onClick={(e) => removeFile(e, "logo")}>Remove file</button>
+          )}
         </div>
       </div>
 
@@ -216,14 +199,15 @@ const PortfolioForm = (props) => {
           imageType="video"
           accept="video/*"
           onSuccessfulDrop={onSuccessfulDrop}
-          onImageRemove={removeFile}
         >
           {files.video.preview && <video controls src={files.video.preview} />}
         </DragDropPad>
 
-        {/* <button type="button" onClick={(e) => removeFile(e, "video")}>
-          Remove file
-        </button> */}
+        {files.video.preview && (
+          <button type="button" onClick={(e) => removeFile(e, "video")}>
+            Remove file
+          </button>
+        )}
       </div>
 
       <button type="submit" disabled={isLoading}>
