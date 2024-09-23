@@ -17,6 +17,7 @@ const PortfolioManager = () => {
   };
 
   const handleFileUpload = (section, file, preview) => {
+    console.log("handleFileUpload");
     setFiles((prev) => {
       cleanupPreviewUrl(prev[section].preview);
 
@@ -27,11 +28,15 @@ const PortfolioManager = () => {
     });
   };
 
-  const removeFile = (category) => {
+  const removeFile = (e, category) => {
+    e.preventDefault();
+    console.log("removeFile");
     const defaultState = { file: null, preview: "" };
 
     setFiles((prev) => ({ ...prev, [category]: defaultState }));
   };
+
+  console.log("files", files);
 
   const clearForm = () => {
     setFormData(INITIAL_FORM_STATE);

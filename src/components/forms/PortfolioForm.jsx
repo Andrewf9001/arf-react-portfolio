@@ -1,10 +1,9 @@
 import { useState } from "react";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { addDoc, collection } from "firebase/firestore";
 
 import DragDropPad from "../features/dropzone/DragDropPad";
 
-import { db, storage } from "../../services/firebase";
+import { storage } from "../../services/firebase";
 import { useAppData } from "../../context/AppDataContext";
 
 const PortfolioForm = (props) => {
@@ -21,6 +20,7 @@ const PortfolioForm = (props) => {
   const { addProject, updateProject } = useAppData();
 
   const uploadToStorage = async (file, path) => {
+    console.log("uploadToStorage");
     const storageRef = ref(storage, `${path}/${file.name}`);
     const snapshot = await uploadBytes(storageRef, file);
     return await getDownloadURL(snapshot.ref);
@@ -33,6 +33,8 @@ const PortfolioForm = (props) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
+
+    console.log("handleSubmit");
 
     if (!formData.category) return;
 
@@ -73,6 +75,7 @@ const PortfolioForm = (props) => {
         videoUrl,
       };
 
+      console.log("formId", formData.id ? true : false);
       formData.id ? updateProject(formData.id, data) : addProject(data);
 
       clearForm();
@@ -170,7 +173,7 @@ const PortfolioForm = (props) => {
             )}
           </DragDropPad>
 
-          <button onClick={() => removeFile("thumb")}>Remove file</button>
+          <button onClick={(e) => removeFile(e, "thumb")}>Remove file</button>
         </div>
 
         <div className="drop-wrapper">
@@ -185,7 +188,7 @@ const PortfolioForm = (props) => {
             )}
           </DragDropPad>
 
-          <button onClick={() => removeFile("banner")}>Remove file</button>
+          <button onClick={(e) => removeFile(e, "banner")}>Remove file</button>
         </div>
 
         <div className="drop-wrapper">
@@ -200,7 +203,7 @@ const PortfolioForm = (props) => {
             )}
           </DragDropPad>
 
-          <button onClick={() => removeFile("logo")}>Remove file</button>
+          <button onClick={(e) => removeFile(e, "logo")}>Remove file</button>
         </div>
       </div>
 
@@ -214,10 +217,12 @@ const PortfolioForm = (props) => {
           {files.video.preview && <video controls src={files.video.preview} />}
         </DragDropPad>
 
-        <button onClick={() => removeFile("video")}>Remove file</button>
+        <button type="button" onClick={(e) => removeFile(e, "video")}>
+          Remove file
+        </button>
       </div>
 
-      <button disabled={isLoading}>
+      <button type="submit" disabled={isLoading}>
         {isLoading ? "Uploading..." : "Save"}
       </button>
     </form>
