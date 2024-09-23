@@ -28,12 +28,13 @@ const PortfolioManager = () => {
     });
   };
 
-  const removeFile = (e, category) => {
+  const removeFile = (e, category, func) => {
     e.preventDefault();
     console.log("removeFile");
     const defaultState = { file: null, preview: "" };
 
     setFiles((prev) => ({ ...prev, [category]: defaultState }));
+    func();
   };
 
   console.log("files", files);

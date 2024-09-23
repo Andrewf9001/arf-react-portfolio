@@ -167,13 +167,14 @@ const PortfolioForm = (props) => {
             imageType="thumb"
             accept="image/*"
             onSuccessfulDrop={onSuccessfulDrop}
+            onImageRemove={removeFile}
           >
             {files.thumb.preview && (
               <img src={files.thumb.preview} alt="Portfolio Item Thumbnail" />
             )}
           </DragDropPad>
 
-          <button onClick={(e) => removeFile(e, "thumb")}>Remove file</button>
+          {/* <button onClick={(e) => removeFile(e, "thumb")}>Remove file</button> */}
         </div>
 
         <div className="drop-wrapper">
@@ -182,13 +183,14 @@ const PortfolioForm = (props) => {
             imageType="banner"
             accept="image/*"
             onSuccessfulDrop={onSuccessfulDrop}
+            onImageRemove={removeFile}
           >
             {files.banner.preview && (
               <img src={files.banner.preview} alt="Portfolio Item Banner" />
             )}
           </DragDropPad>
 
-          <button onClick={(e) => removeFile(e, "banner")}>Remove file</button>
+          {/* <button onClick={(e) => removeFile(e, "banner")}>Remove file</button> */}
         </div>
 
         <div className="drop-wrapper">
@@ -197,13 +199,14 @@ const PortfolioForm = (props) => {
             imageType="logo"
             accept="image/*"
             onSuccessfulDrop={onSuccessfulDrop}
+            onImageRemove={removeFile}
           >
             {files.logo.preview && (
               <img src={files.logo.preview} alt="Portfolio Item Logo" />
             )}
           </DragDropPad>
 
-          <button onClick={(e) => removeFile(e, "logo")}>Remove file</button>
+          {/* <button onClick={(e) => removeFile(e, "logo")}>Remove file</button> */}
         </div>
       </div>
 
@@ -213,13 +216,14 @@ const PortfolioForm = (props) => {
           imageType="video"
           accept="video/*"
           onSuccessfulDrop={onSuccessfulDrop}
+          onImageRemove={removeFile}
         >
           {files.video.preview && <video controls src={files.video.preview} />}
         </DragDropPad>
 
-        <button type="button" onClick={(e) => removeFile(e, "video")}>
+        {/* <button type="button" onClick={(e) => removeFile(e, "video")}>
           Remove file
-        </button>
+        </button> */}
       </div>
 
       <button type="submit" disabled={isLoading}>

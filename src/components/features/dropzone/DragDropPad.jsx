@@ -1,6 +1,12 @@
 import { useRef } from "react";
 
-const DragDropPad = ({ children, imageType, accept, onSuccessfulDrop }) => {
+const DragDropPad = ({
+  children,
+  imageType,
+  accept,
+  onSuccessfulDrop,
+  onImageRemove,
+}) => {
   const inputRef = useRef(null);
 
   const handleOnDrop = (e) => {
@@ -18,26 +24,39 @@ const DragDropPad = ({ children, imageType, accept, onSuccessfulDrop }) => {
     e.preventDefault();
   };
 
-  return (
-    <div
-      className="drag-drop-container"
-      onClick={() => inputRef.current.click()}
-      onDragOver={handleOnDragOver}
-      onDrop={handleOnDrop}
-    >
-      <input
-        type="file"
-        ref={inputRef}
-        accept={accept}
-        onChange={handleOnDrop}
-      />
+  const resetInputRef = () => {
+    inputRef.current = "";
+  };
 
-      {children ? (
-        children
-      ) : (
-        <div>Click or Drop {imageType === "video" ? "video" : "image"}</div>
+  console.log("inputRef.current", inputRef.current);
+  return (
+    <>
+      <div
+        className="drag-drop-container"
+        onClick={() => inputRef.current.click()}
+        onDragOver={handleOnDragOver}
+        onDrop={handleOnDrop}
+      >
+        <input
+          type="file"
+          ref={inputRef}
+          accept={accept}
+          onChange={handleOnDrop}
+        />
+
+        {children ? (
+          children
+        ) : (
+          <div>Click or Drop {imageType === "video" ? "video" : "image"}</div>
+        )}
+      </div>
+
+      {children && (
+        <button onClick={(e) => onImageRemove(e, imageType, resetInputRef)}>
+          Remove file
+        </button>
       )}
-    </div>
+    </>
   );
 };
 
