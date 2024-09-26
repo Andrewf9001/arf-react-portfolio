@@ -3,7 +3,6 @@
   gap: 21px;
   margin: 4%;
   font-size: 1.8em;
-  position: relative;
 
   input[type="text"],
   textarea,
@@ -44,8 +43,8 @@
 
   .clear-button {
     position: absolute;
-    right: 0;
-    top: -5%;
+    top: 1.2%;
+    right: 4%;
   }
 
   .upload-wrapper {
@@ -59,6 +58,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-bottom: 2%;
 
     .drag-drop-container {
       display: flex;

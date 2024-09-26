@@ -1,0 +1,35 @@
+.portfolio-form-container {
+  .upload-wrapper {
+    margin-bottom: 2%;
+
+    .drop-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+
+      button {
+        color: red;
+        background-color: transparent;
+        position: absolute;
+        bottom: -14%;
+      }
+
+      .drag-drop-container {
+        height: 200px;
+        width: 200px;
+      }
+    }
+  }
+
+  .video-upload-wrapper {
+    position: relative;
+
+    button {
+      color: red;
+      background-color: transparent;
+      position: absolute;
+      bottom: -8%;
+    }
+  }
+}
