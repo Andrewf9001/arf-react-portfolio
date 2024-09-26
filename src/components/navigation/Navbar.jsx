@@ -9,6 +9,7 @@ const Navbar = () => {
       <div className="left-column">
         <NavLink to="/">Home</NavLink>
         <NavLink to="/about">About</NavLink>
+        <NavLink to="/contact">Contact</NavLink>
 
         {currentUser && (
           <NavLink to="/portfolio-manager">Portfolio Manager</NavLink>
