@@ -3,6 +3,7 @@
   gap: 21px;
   margin: 4%;
   font-size: 1.8em;
+  position: relative;
 
   input[type="text"],
   textarea,
@@ -39,6 +40,12 @@
       background-color: lightgray;
       cursor: default;
     }
+  }
+
+  .clear-button {
+    position: absolute;
+    right: 0;
+    top: -5%;
   }
 
   .upload-wrapper {
