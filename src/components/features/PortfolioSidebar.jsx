@@ -55,7 +55,10 @@ const PortfolioSidebar = ({ setPorfolioItem }) => {
 
   return (
     <div className="portfolio-sidebar-container">
+      <h2>Hobbies</h2>
       {renderData(hobbies)}
+
+      <h2>Web Development</h2>
       {renderData(projects)}
 
       {/* Create Modal for this spot when deleting */}
