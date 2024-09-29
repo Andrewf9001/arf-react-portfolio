@@ -90,6 +90,10 @@ const PortfolioForm = (props) => {
 
   return (
     <form className="portfolio-form-container" onSubmit={handleSubmit}>
+      <button className="clear-button" type="button" onClick={clearForm}>
+        Clear Form
+      </button>
+
       <div className="two-column">
         <input
           type="text"

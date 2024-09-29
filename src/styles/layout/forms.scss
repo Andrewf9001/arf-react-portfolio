@@ -41,6 +41,12 @@
     }
   }
 
+  .clear-button {
+    position: absolute;
+    top: 1.2%;
+    right: 4%;
+  }
+
   .upload-wrapper {
     display: flex;
     justify-content: space-evenly;
@@ -52,6 +58,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-bottom: 2%;
 
     .drag-drop-container {
       display: flex;

@@ -4,6 +4,7 @@ import PortfolioManager from "./pages/PortfiolioManager";
 import Navbar from "./navigation/Navbar";
 import Homepage from "./pages/Homepage";
 import Project from "./pages/Project";
+import Contact from "./pages/Contact";
 import About from "./pages/About";
 import Login from "./pages/Login";
 
@@ -26,6 +27,7 @@ const App = () => {
         <Routes>
           <Route exact path="/" element={<Homepage />} />
           <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
 
           <Route path="/project/:projectId" element={<Project />} />
 
