@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { useAppData } from "../../context/AppDataContext";
@@ -10,16 +10,13 @@ const Project = () => {
 
   const { type, projectId } = useParams();
   const { getProjectData } = useAppData();
-  // const projectId = props.match.params.projectId;
-  console.log("data", data);
-  // TODO: After setting up data, connect to firebase to get the record
 
   useEffect(() => {
     getProjectData(projectId, type)
       .then((data) => setData(data))
       .catch((err) => console.error("Get Project: ", err))
       .finally(() => setIsLoading(false));
-  }, []);
+  }, [projectId, type, getProjectData]);
 
   if (isLoading) {
     return (
