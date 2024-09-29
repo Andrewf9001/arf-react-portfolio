@@ -7,7 +7,11 @@ const Homepage = () => {
   const renderData = (data) => {
     return data?.map((item) => {
       return (
-        <Link className="item-wrapper" to={`/project/${item.id}`} key={item.id}>
+        <Link
+          className="item-wrapper"
+          to={`/project/${item.category}/${item.id}`}
+          key={item.id}
+        >
           <div className="portfolio-item-wrapper">
             <img
               className="thumbnail"

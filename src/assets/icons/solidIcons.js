@@ -1,7 +1,7 @@
 import { library } from "@fortawesome/fontawesome-svg-core";
 
-import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faEdit, faSpinner, faTrash } from "@fortawesome/free-solid-svg-icons";
 
 export const solidIcons = () => {
-  library.add(faEdit, faTrash);
+  library.add(faEdit, faTrash, faSpinner);
 };
