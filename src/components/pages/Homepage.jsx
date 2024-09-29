@@ -14,13 +14,12 @@ const Homepage = () => {
               src={item.thumbUrl}
               alt={`${item.name} Thumbnail`}
             />
+
             <img
               className="logo"
               src={item.logoUrl}
               alt={`${item.name} Logo`}
             />
-
-            <div className="subtitle">{item.description}</div>
           </div>
         </Link>
       );

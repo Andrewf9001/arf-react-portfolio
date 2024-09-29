@@ -2,27 +2,37 @@
   display: flex;
   flex-direction: column;
 
+  .filter-buttons-wrapper {
+  }
+
   .data-wrapper {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
 
     .item-wrapper {
+      display: flex;
+      justify-content: center;
+
       .portfolio-item-wrapper {
         position: relative;
 
         img {
-          width: 50%;
+          width: 100%;
+          height: 100%;
         }
 
         .logo {
+          transition: all 0.3s ease-in-out;
+          opacity: 0;
           position: absolute;
-          display: none;
+          top: 0;
+          left: 0;
         }
       }
 
       &:hover {
         .logo {
-          display: block;
+          opacity: 1;
         }
       }
     }
