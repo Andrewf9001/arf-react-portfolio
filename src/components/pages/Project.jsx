@@ -34,19 +34,26 @@ const Project = () => {
     <div className="project-container">
       <h1>{data?.name}</h1>
 
-      <img className="logo" src={data?.bannerUrl} alt="Project Logo" />
-
-      <p>{data?.description}</p>
+      <img className="banner" src={data?.bannerUrl} alt="Project Banner" />
 
       {data?.url && (
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href={`https://${data.url}`}
-        >
-          {data.urlText}
-        </a>
+        <div className="project-link-wrapper">
+          <span>Project Link: </span>
+
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href={`https://${data.url}`}
+          >
+            {data.urlText}
+          </a>
+        </div>
       )}
+
+      <p>
+        <span>Description: </span>
+        {data?.description}
+      </p>
 
       {data?.videoUrl && <video controls src={data.videoUrl} />}
     </div>
