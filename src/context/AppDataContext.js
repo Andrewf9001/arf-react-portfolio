@@ -1,4 +1,10 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import { getStorage, ref, deleteObject } from "firebase/storage";
 import {
   collection,
@@ -22,16 +28,19 @@ export const AppDataProvider = ({ children }) => {
   const storage = getStorage();
   const firestore = getFirestore();
 
-  const getProjectData = async (id, type) => {
-    const docRef = doc(firestore, type, id);
-    const docSnapshot = await getDoc(docRef);
+  const getProjectData = useCallback(
+    async (id, type) => {
+      const docRef = doc(firestore, type, id);
+      const docSnapshot = await getDoc(docRef);
 
-    if (docSnapshot.exists()) {
-      return docSnapshot.data();
-    } else {
-      return null;
-    }
-  };
+      if (docSnapshot.exists()) {
+        return docSnapshot.data();
+      } else {
+        return null;
+      }
+    },
+    [firestore]
+  );
 
   const addProject = async (data) => {
     try {

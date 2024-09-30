@@ -1,16 +1,55 @@
 .homepage-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  margin: 2%;
+  display: flex;
+  flex-direction: column;
 
-  .projects-wrapper {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  .filter-buttons-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    height: 30px;
 
-    .name-image-wrapper {
+    button {
+      color: #fff;
+      background-color: #259999;
+      border: none;
+      transition: all 0.3s ease-in-out;
+      cursor: pointer;
+
+      &:hover {
+        background-color: #1e7777;
+      }
+    }
+  }
+
+  .data-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+
+    .item-wrapper {
       display: flex;
+      justify-content: center;
+
+      .portfolio-item-wrapper {
+        position: relative;
+
+        img {
+          width: 100%;
+          height: 100%;
+        }
+
+        .logo {
+          transition: all 0.3s ease-in-out;
+          opacity: 0;
+          position: absolute;
+          top: 0;
+          left: 0;
+        }
+      }
+
+      &:hover {
+        .logo {
+          opacity: 1;
+        }
+      }
     }
   }
 }
