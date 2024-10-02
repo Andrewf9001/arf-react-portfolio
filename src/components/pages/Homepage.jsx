@@ -13,10 +13,9 @@ const Homepage = () => {
           key={item.id}
         >
           <div className="portfolio-item-wrapper">
-            <img
+            <div
               className="thumbnail"
-              src={item.thumbUrl}
-              alt={`${item.name} Thumbnail`}
+              style={{ backgroundImage: `url(${item.thumbUrl})` }}
             />
 
             <img
