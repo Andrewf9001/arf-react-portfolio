@@ -35,8 +35,6 @@ const Project = () => {
 
       {data?.url && (
         <div className="project-link-wrapper">
-          <span>Project Link: </span>
-
           <a
             target="_blank"
             rel="noopener noreferrer"
