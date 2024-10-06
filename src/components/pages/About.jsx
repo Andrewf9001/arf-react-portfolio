@@ -1,12 +1,8 @@
-import profilePhoto from "../../assets/images/personal-photo.jpeg";
-
 const About = () => {
   return (
     <div className="about-container">
-      <h1>About Me</h1>
-
       <div className="content-wrapper">
-        <img src={profilePhoto} alt="Andrew Fletcher Headshot" />
+        <div className="profile-picture" />
 
         <div className="paragraphs-wrapper">
           <p>
