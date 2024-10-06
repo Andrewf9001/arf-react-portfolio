@@ -3,9 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const Contact = () => {
   return (
     <div className="contact-container">
-      <div className="left-column"></div>
-
-      <div className="right-column">
+      <div className="left-column">
         <div className="row-wrapper">
           <FontAwesomeIcon icon="fa-solid fa-phone" />
           <div>888-888-8888</div>
@@ -21,6 +19,8 @@ const Contact = () => {
           <div>SLC, UT</div>
         </div>
       </div>
+
+      <div className="background-image" />
     </div>
   );
 };
