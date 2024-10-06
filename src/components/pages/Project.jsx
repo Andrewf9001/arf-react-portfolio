@@ -47,10 +47,7 @@ const Project = () => {
         </div>
       )}
 
-      <p>
-        <span>Description: </span>
-        {data?.description}
-      </p>
+      <p>{data?.description}</p>
 
       {data?.videoUrl && <video controls src={data.videoUrl} />}
     </div>
