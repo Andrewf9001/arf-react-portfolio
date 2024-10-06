@@ -1,11 +1,25 @@
+import { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
+
 import { useAppData } from "../../context/AppDataContext";
 
 const Homepage = () => {
+  const [filter, setFilter] = useState("");
   const { hobbies, projects } = useAppData();
 
-  const renderData = (data) => {
-    return data?.map((item) => {
+  const portfolioData = useMemo(() => {
+    const data = [...hobbies, ...projects];
+
+    if (!filter) return data;
+    else if (filter === "hobbies") {
+      return data.filter((item) => item.category !== "Hobbies");
+    } else if (filter === "projects") {
+      return data.filter((item) => item.category !== "Projects");
+    }
+  }, [filter, hobbies, projects]);
+
+  const renderData = () => {
+    return portfolioData?.map((item) => {
       return (
         <Link
           className="item-wrapper"
@@ -34,17 +48,14 @@ const Homepage = () => {
   return (
     <div className="homepage-container">
       <div className="filter-buttons-wrapper">
-        <button>Hobbies</button>
+        <button onClick={() => setFilter("hobbies")}>Hobbies</button>
 
-        <button>Web Development</button>
+        <button onClick={() => setFilter("projects")}>Web Development</button>
 
-        <button>All</button>
+        <button onClick={() => setFilter("")}>All</button>
       </div>
 
-      <div className="data-wrapper">
-        {renderData(hobbies)}
-        {renderData(projects)}
-      </div>
+      <div className="data-wrapper">{renderData()}</div>
     </div>
   );
 };
