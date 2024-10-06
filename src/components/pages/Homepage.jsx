@@ -18,11 +18,13 @@ const Homepage = () => {
               style={{ backgroundImage: `url(${item.thumbUrl})` }}
             />
 
-            <img
-              className="logo"
-              src={item.logoUrl}
-              alt={`${item.name} Logo`}
-            />
+            <div className="logo-wrapper">
+              <img
+                className="logo"
+                src={item.logoUrl}
+                alt={`${item.name} Logo`}
+              />
+            </div>
           </div>
         </Link>
       );
