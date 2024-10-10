@@ -8,13 +8,15 @@ const Homepage = () => {
   const { hobbies, projects } = useAppData();
 
   const portfolioData = useMemo(() => {
-    const data = [...hobbies, ...projects];
+    if (hobbies && projects) {
+      const data = [...hobbies, ...projects];
 
-    if (!filter) return data;
-    else if (filter === "hobbies") {
-      return data.filter((item) => item.category !== "Hobbies");
-    } else if (filter === "projects") {
-      return data.filter((item) => item.category !== "Projects");
+      if (!filter) return data;
+      else if (filter === "hobbies") {
+        return data.filter((item) => item.category !== "Hobbies");
+      } else if (filter === "projects") {
+        return data.filter((item) => item.category !== "Projects");
+      }
     }
   }, [filter, hobbies, projects]);
 
