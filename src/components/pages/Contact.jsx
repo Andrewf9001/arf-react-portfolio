@@ -6,7 +6,7 @@ const Contact = () => {
       <div className="left-column">
         <div className="row-wrapper">
           <FontAwesomeIcon icon="fa-solid fa-phone" />
-          <div>888-888-8888</div>
+          <div>(801) 678-7318</div>
         </div>
 
         <div className="row-wrapper">
