@@ -13,9 +13,9 @@ const Homepage = () => {
 
       if (!filter) return data;
       else if (filter === "hobbies") {
-        return data.filter((item) => item.category !== "Hobbies");
+        return data.filter((item) => item.category === "Hobbies");
       } else if (filter === "projects") {
-        return data.filter((item) => item.category !== "Projects");
+        return data.filter((item) => item.category === "Projects");
       }
     }
   }, [filter, hobbies, projects]);
